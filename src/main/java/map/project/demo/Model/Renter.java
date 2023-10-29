@@ -27,7 +27,7 @@ public class Renter {
     private String IBAN;
 
     @OneToMany(mappedBy = "renter")
-    List<User> users;
+    List<RenterEmployee> renterEmployees;
 
     @OneToMany(mappedBy = "renter")
     List<Unit> units;

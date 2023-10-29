@@ -11,12 +11,12 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@Table(name = "User")
-public class User {
+@Table(name = "RenterEmployee")
+public class RenterEmployee {
 
     @Id
     @GeneratedValue
-    private Long userId;
+    private Long renterEmployeeId;
 
     @Column(name = "name")
     private String name;
