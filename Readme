@@ -1,0 +1,14 @@
+WE have created the model based on the diagram displayed in properties and also the repository layer .
+The service and controller layer are easly implemented once we get the filtering ideas we need.
+
+Controller layer will be implemented with Rest and the UI will listen to the mapping required.
+An example of this will be found for the bill.
+
+
+TODOS:
+create the appropriate functionalities in the repo and brach out to the controller layer as seen in Bill
+
+Find / implement suitable design pattern -
+1 . Factory for the User Employee
+2 . Command for the UI
+anything else
