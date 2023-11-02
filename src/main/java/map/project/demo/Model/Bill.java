@@ -23,7 +23,6 @@ public class Bill {
     @Column(name = "paymentStatus")
     private PaymentStatus paymentStatus;
 
-
     @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
     List<Reading> readings;
 

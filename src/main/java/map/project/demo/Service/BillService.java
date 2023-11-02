@@ -15,7 +15,6 @@ public class BillService {
     private BillRepository billRepository;
     //todo implementation of harder stuff than the repo
 
-
     public Optional<Bill> findByBillId(Long billId) {
         return Optional.ofNullable(this.billRepository.findByBillId(billId));
     }
@@ -34,17 +33,19 @@ public class BillService {
     }
     // crud operations
 
+    public void addBill(Bill bill) {
+        this.billRepository.save(bill);
+    }
 
-    public void addBill(Bill bill){
+    public void update(Bill bill) {
         this.billRepository.save(bill);
     }
-    public void update(Bill bill){
-        this.billRepository.save(bill);
-    }
-    public void read(Bill bill){
+
+    public void read(Bill bill) {
         this.billRepository.findById(bill.getBillId());
     }
-    public void delete(Bill bill){
+
+    public void delete(Bill bill) {
         this.billRepository.delete(bill);
     }
 }

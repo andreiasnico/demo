@@ -22,7 +22,7 @@ public class Counter {
     @Column(name = "counterTypes")
     private CounterTypes counterTypes;
 
-    @Column(name="pricePerUnit")
+    @Column(name = "pricePerUnit")
     private long pricePerUnit;
 
     @Column(name = "checkingDate")

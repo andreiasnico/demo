@@ -30,5 +30,4 @@ public class Employee {
     private List<EmployeeSchedule> employeeSchedules;
 
 
-
 }

@@ -27,7 +27,6 @@ public class Unit {
     @Column(name = "surface")
     private Long surface;
 
-
     @ManyToOne
     @JoinColumn(name = "buildingId")
     private Building building;
@@ -39,7 +38,7 @@ public class Unit {
     @JoinColumn(name = "renterId")
     private Renter renter;
 
-    @OneToMany(mappedBy = "unit" , fetch= FetchType.EAGER)
+    @OneToMany(mappedBy = "unit", fetch = FetchType.EAGER)
     private List<EmployeeSchedule> employeeSchedules;
 
     @Override
