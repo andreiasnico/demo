@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 public class BuildingService {
-//    @Autowired
-//    private UnitRepository unitRepository;
-//
-//    public Optional<Unit> findByUnitId(Long unitId){
-//
-//        return unitRepository.findByUnitId(unitId);
-//    }
-//
-//    public Unit save(Unit unit){
-//        unitRepository.save(unit);
-//        return unit;
-//    }
-//
-//    public void delete(Unit unit){
-//        unitRepository.delete(unit);
-//    }
+    @Autowired
+    private UnitRepository unitRepository;
+
+    public Optional<Unit> findByUnitId(Long unitId){
+
+        return unitRepository.findByUnitId(unitId);
+    }
+
+    public Unit save(Unit unit){
+        unitRepository.save(unit);
+        return unit;
+    }
+
+    public void delete(Unit unit){
+        unitRepository.delete(unit);
+    }
 
 
 }
