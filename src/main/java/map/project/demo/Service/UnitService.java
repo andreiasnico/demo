@@ -13,6 +13,17 @@ public class UnitService {
     private UnitRepository unitRepository;
 
     public Optional<Unit> findByUnitId(Long unitId){
+
         return unitRepository.findByUnitId(unitId);
+    }
+    public Unit save(Unit unit){
+        unitRepository.save(unit);
+        return unit;
+    }
+    public Iterable<Unit> findAll(){
+        return unitRepository.findAll();
+    }
+    public void delete(Unit unit){
+        unitRepository.delete(unit);
     }
 }
