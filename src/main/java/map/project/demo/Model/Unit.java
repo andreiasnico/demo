@@ -39,7 +39,16 @@ public class Unit {
     @JoinColumn(name = "renterId")
     private Renter renter;
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "unit" , fetch= FetchType.EAGER)
     private List<EmployeeSchedule> employeeSchedules;
 
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "unitId=" + unitId +
+                ", name='" + name + '\'' +
+                ", storyNumber=" + storyNumber +
+                ", surface=" + surface +
+                '}';
+    }
 }

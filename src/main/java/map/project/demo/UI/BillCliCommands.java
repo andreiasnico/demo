@@ -21,26 +21,27 @@ public class BillCliCommands {
     private BillService billService;
     @Autowired
     private UnitService unitService;
-    @ShellMethod(key = "bills" , value = "show all bills")
-    public String allBills(){
+
+    @ShellMethod(key = "bills", value = "show all bills")
+    public String allBills() {
         return billService.findAllBills().toString();
     }
 
-    @ShellMethod(key="by unit" , value = "show all bills from a unit ")
-    public String allBillsFromUnit(@ShellOption(value = {"unitId"} , help = "Id of the unit") Long unitId){
+    @ShellMethod(key = "by unit", value = "show all bills from a unit ")
+    public String allBillsFromUnit(@ShellOption(value = {"unitId"}, help = "Id of the unit") Long unitId) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
-        if(unit .equals( Optional.empty())){
+        if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
         }
         return billService.findAllBillsByUnit(unit.get()).toString();
     }
 
-    @ShellMethod(key="add bill" , value = "add a bill to our database")
-    public String addBill(@ShellOption(value = {"delivery"} , help = "delivery method for the bill")DeliveryMethods deliveryMethod,
-                          @ShellOption(value = {"unit"} , help = "the unit to which it belongs mapped by id") Long unitId ,
-                          @ShellOption(value = {"status"} , help = "payment status of the bill")PaymentStatus status){
+    @ShellMethod(key = "add bill", value = "add a bill to our database")
+    public String addBill(@ShellOption(value = {"delivery"}, help = "delivery method for the bill") DeliveryMethods deliveryMethod,
+                          @ShellOption(value = {"unit"}, help = "the unit to which it belongs mapped by id") Long unitId,
+                          @ShellOption(value = {"status"}, help = "payment status of the bill") PaymentStatus status) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
-        if(unit.equals(Optional.empty())){
+        if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
         }
         Bill addBill = new Bill();
@@ -50,17 +51,17 @@ public class BillCliCommands {
         return this.billService.save(addBill).toString();
     }
 
-    @ShellMethod(key="update bill" , value = "update a bill from our database")
-    public String updateBill(@ShellOption(value = {"billId"} , help = "id of the bill") Long billId ,
-                             @ShellOption(value = {"delivery"} , help = "delivery method for the bill")DeliveryMethods deliveryMethod,
-                             @ShellOption(value = {"unit"} , help = "the unit to which it belongs mapped by id") Long unitId ,
-                             @ShellOption(value = {"status"} , help = "payment status of the bill")PaymentStatus status){
+    @ShellMethod(key = "update bill", value = "update a bill from our database")
+    public String updateBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId,
+                             @ShellOption(value = {"delivery"}, help = "delivery method for the bill") DeliveryMethods deliveryMethod,
+                             @ShellOption(value = {"unit"}, help = "the unit to which it belongs mapped by id") Long unitId,
+                             @ShellOption(value = {"status"}, help = "payment status of the bill") PaymentStatus status) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
-        if(unit.equals(Optional.empty())){
+        if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
         }
         Optional<Bill> bill = billService.findByBillId(billId);
-        if(bill.equals(Optional.empty())){
+        if (bill.equals(Optional.empty())) {
             return "There is no bill with this id";
         }
         Bill updateBill = bill.get();
@@ -69,19 +70,21 @@ public class BillCliCommands {
         updateBill.setPaymentStatus(status);
         return this.billService.save(updateBill).toString();
     }
-    @ShellMethod(key="delete bill" , value = "delete a bill from our database")
-    public String deleteBill(@ShellOption(value = {"billId"} , help = "id of the bill") Long billId){
+
+    @ShellMethod(key = "delete bill", value = "delete a bill from our database")
+    public String deleteBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
-        if(bill.equals(Optional.empty())){
+        if (bill.equals(Optional.empty())) {
             return "There is no bill with this id";
         }
         billService.delete(bill.get());
         return "Bill deleted";
     }
-    @ShellMethod(key="read bill" , value = "read a bill from our database")
-    public String readBill(@ShellOption(value = {"billId"} , help = "id of the bill") Long billId){
+
+    @ShellMethod(key = "read bill", value = "read a bill from our database")
+    public String readBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
-        if(bill.equals(Optional.empty())){
+        if (bill.equals(Optional.empty())) {
             return "There is no bill with this id";
         }
         return bill.get().toString();
