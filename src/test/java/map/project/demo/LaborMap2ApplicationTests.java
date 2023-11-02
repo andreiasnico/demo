@@ -8,6 +8,8 @@ class LaborMap2ApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+
 	}
 
 }
