@@ -37,25 +37,33 @@ public class BillCliCommands {
     }
 
     @ShellMethod(key = "add bill", value = "add a bill to our database")
-    public String addBill(@ShellOption(value = {"delivery"}, help = "delivery method for the bill") DeliveryMethods deliveryMethod,
+    public String addBill(@ShellOption(value = {"delivery"}, help = "delivery method for the bill") String deliveryMethod,
                           @ShellOption(value = {"unit"}, help = "the unit to which it belongs mapped by id") Long unitId,
-                          @ShellOption(value = {"status"}, help = "payment status of the bill") PaymentStatus status) {
+                          @ShellOption(value = {"status"}, help = "payment status of the bill") String status) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
         if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
         }
+        PaymentStatus paymentStatus = PaymentStatus.valueOf(status);
+        DeliveryMethods delivery = DeliveryMethods.valueOf(DeliveryMethods.class , deliveryMethod);
         Bill addBill = new Bill();
-        addBill.setUnit(unit.get());
-        addBill.setDeliveryMethod(deliveryMethod);
-        addBill.setPaymentStatus(status);
+        if(unitId != null) {
+            addBill.setUnit(unit.get());
+        }
+        if(!deliveryMethod.equals("")) {
+            addBill.setDeliveryMethod(delivery);
+        }
+        if(!status.equals("")) {
+            addBill.setPaymentStatus(paymentStatus);
+        }
         return this.billService.save(addBill).toString();
     }
 
     @ShellMethod(key = "update bill", value = "update a bill from our database")
     public String updateBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId,
-                             @ShellOption(value = {"delivery"}, help = "delivery method for the bill") DeliveryMethods deliveryMethod,
+                             @ShellOption(value = {"delivery"}, help = "delivery method for the bill") String deliveryMethod,
                              @ShellOption(value = {"unit"}, help = "the unit to which it belongs mapped by id") Long unitId,
-                             @ShellOption(value = {"status"}, help = "payment status of the bill") PaymentStatus status) {
+                             @ShellOption(value = {"status"}, help = "payment status of the bill") String status) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
         if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
@@ -64,10 +72,12 @@ public class BillCliCommands {
         if (bill.equals(Optional.empty())) {
             return "There is no bill with this id";
         }
+        DeliveryMethods delivery = DeliveryMethods.valueOf(deliveryMethod);
+        PaymentStatus payment = PaymentStatus.valueOf(status);
         Bill updateBill = bill.get();
         updateBill.setUnit(unit.get());
-        updateBill.setDeliveryMethod(deliveryMethod);
-        updateBill.setPaymentStatus(status);
+        updateBill.setDeliveryMethod(delivery);
+        updateBill.setPaymentStatus(payment);
         return this.billService.save(updateBill).toString();
     }
 

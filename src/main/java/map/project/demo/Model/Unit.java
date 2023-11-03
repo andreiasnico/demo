@@ -38,7 +38,7 @@ public class Unit {
     @JoinColumn(name = "renterId")
     private Renter renter;
 
-    @OneToMany(mappedBy = "unit", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "unit", fetch = FetchType.LAZY)
     private List<EmployeeSchedule> employeeSchedules;
 
     @Override

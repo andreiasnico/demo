@@ -1,6 +1,7 @@
 package map.project.demo;
 
 import map.project.demo.Model.Bill;
+import map.project.demo.Model.DeliveryMethods;
 import map.project.demo.Model.Unit;
 import map.project.demo.Repository.BillRepository;
 import map.project.demo.Service.BillService;
@@ -49,6 +50,7 @@ public class BillServiceTest {
     public void testFindAllBills() {
         // Arrange
         List<Bill> mockBills = Arrays.asList(new Bill(), new Bill());
+        mockBills.get(0).setDeliveryMethod(DeliveryMethods.Email);
         when(billRepository.findAll()).thenReturn(mockBills);
 
         // Act
