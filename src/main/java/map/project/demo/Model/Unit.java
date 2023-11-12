@@ -27,7 +27,6 @@ public class Unit {
     @Column(name = "surface")
     private Long surface;
 
-
     @ManyToOne
     @JoinColumn(name = "buildingId")
     private Building building;
@@ -39,7 +38,16 @@ public class Unit {
     @JoinColumn(name = "renterId")
     private Renter renter;
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "unit", fetch = FetchType.LAZY)
     private List<EmployeeSchedule> employeeSchedules;
 
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "unitId=" + unitId +
+                ", name='" + name + '\'' +
+                ", storyNumber=" + storyNumber +
+                ", surface=" + surface +
+                '}';
+    }
 }

@@ -1,3 +1,47 @@
-1698574767326:aaa
-1698574776283:findAll
-1698579008579:bills
+1698923988050:bills
+1698924004668:add unit
+1698924028589:add unit 'saraca' 3 200
+1698924039171:units
+1698924437286:stacktrace
+1698924574022:units
+1698924597079:add unit 'salut' 2 , 200
+1698924613893:add unit 'salut' 2 200
+1698924623516:units
+1698924666494:add unit
+1698924677973:add unit salut 2 100
+1698924681348:units
+1698940732503:add units 'aa' 2 20
+1698940764480:add unit 'aa' 2 20
+1698940767300:units
+1698941124190:bills
+1698941240357:add bill 1 'Email' 'Pending'
+1698941770630:add ubit 'myUnit' 2 20
+1698941779587:add unit 'myUnit' 2 20
+1698941781958:units
+1698941783969:add bill
+1698941801496:ad bill 'Email' 1 'Pending'
+1698941812773:add bill 'Email' 1 'Pending'
+1698941815574:bills
+1698941866006:delete bill 1
+1698941868835:bills
+1698943006624:add unit 'myunit' 1 20
+1698943034659:add bill
+1698943082212:add bill 'Email' 1 'Pending'
+1698943111438:update bill --delivery 'Post'
+1698943135717:update bill 'Post'
+1698943276349:update bill delivery 'Post'
+1698943289618:update bill
+1698943305859:bills
+1698943502085:add unit 'unit' 1 4312
+1698943534804:add bill 'Post' 1 'Pending'
+1698943606826:add unit 'Unit' 1  1231
+1698943620487:add bill 'Post' 1 'Pending'
+1698943655221:update bill
+1698943665846:update bill 'Email' 1
+1698943677539:update bill 'Email' 1 null
+1698943696365:update bill 'Email' 1 ''
+1698943721418:update bill 1 'Email'
+1698943769590:update bill 1 'Email' 1
+1698943784925:update bill 1 'Email' 1 ''
+1698943799588:update bill 1 'Email' 1 'Pending'
+1698943852905:update bill 1 'Post' 1 ''

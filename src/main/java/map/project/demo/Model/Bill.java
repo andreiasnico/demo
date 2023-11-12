@@ -23,8 +23,7 @@ public class Bill {
     @Column(name = "paymentStatus")
     private PaymentStatus paymentStatus;
 
-
-    @OneToMany(mappedBy = "bill")
+    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
     List<Reading> readings;
 
     @ManyToOne
@@ -34,4 +33,13 @@ public class Bill {
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Payment payment;
+
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "billId=" + billId +
+                ", deliveryMethod=" + deliveryMethod +
+                ", paymentStatus=" + paymentStatus +
+                '}';
+    }
 }
