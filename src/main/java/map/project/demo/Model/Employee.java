@@ -29,6 +29,9 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     private List<EmployeeSchedule> employeeSchedules;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeId" , referencedColumnName = "employeeId")
+    private EntryCard card;
 
 
 }

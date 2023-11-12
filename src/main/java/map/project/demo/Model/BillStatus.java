@@ -1,2 +1,6 @@
-package map.project.demo.Model;public enum BillStatus {
+package map.project.demo.Model;
+
+public enum BillStatus {
+    Payed,
+    Unpayed
 }
