@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Payment {
     @Id
     @GeneratedValue
-    private Long billId;
+    private Long paymentId;
 
     @Column(name = "bank")
     private String bank;
@@ -21,8 +21,14 @@ public class Payment {
     @Column(name = "amount")
     private Long amount;
 
-    @OneToOne
-    @MapsId
+    @Column(name = "billStatus")
+    private BillStatus billStatus = BillStatus.Unpayed;
+
+    @ManyToOne
     @JoinColumn(name = "billId")
     private Bill bill;
+
+    public void updateStatus(){
+        this.billStatus = BillStatus.Payed;
+    }
 }
