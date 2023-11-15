@@ -1,16 +1,26 @@
-package map.project.demo.Service.Builders;
+package map.project.demo.Service.Commanders;
 
+import map.project.demo.Model.Bill;
 import map.project.demo.Model.DeliveryMethods;
 import map.project.demo.Model.PaymentStatus;
 import map.project.demo.Service.BillService;
 
-public  class BillBuilder implements Builder{
+public  class BillCommander implements Commander{
     private final BillService billService;
 
-    public BillBuilder(BillService billService) {
+    private static BillCommander instance = null;
+
+
+    private BillCommander(BillService billService) {
         this.billService = billService;
     }
 
+    public static BillCommander getInstance(BillService service){
+        if(instance == null){
+            instance = new BillCommander(service);
+        }
+        return instance;
+    }
     /**
      * we want to go and set all the bills that have no payment status to Pending
      */
