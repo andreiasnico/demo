@@ -22,7 +22,7 @@ public class Payment {
     private Long amount;
 
     @Column(name = "billStatus")
-    private BillStatus billStatus = BillStatus.Unpayed;
+    private BillStatus billStatus ;
 
     @ManyToOne
     @JoinColumn(name = "billId")
