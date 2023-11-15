@@ -24,6 +24,9 @@ public class Payment {
     @Column(name = "billStatus")
     private BillStatus billStatus ;
 
+    @Column(name = "deliveryMethod")
+    private DeliveryMethods deliveryMethod;
+
     @ManyToOne
     @JoinColumn(name = "billId")
     private Bill bill;
