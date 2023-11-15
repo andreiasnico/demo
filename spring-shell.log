@@ -45,3 +45,18 @@
 1698943784925:update bill 1 'Email' 1 ''
 1698943799588:update bill 1 'Email' 1 'Pending'
 1698943852905:update bill 1 'Post' 1 ''
+1699006327298:bills
+1699006338460:add bill 'Email' 1 'Pending'
+1699006358566:add unit 'Unit1' 1  22
+1699006370955:add bill 'Email' 1 'Pending'
+1699006382388:bills
+1699006410093:delete bill 1
+1699006479561:biils
+1699006481552:bills
+1699006491662:add bill 'Email' 1 'Pending'
+1699006505202:update bill 'Post' 1
+1699006532362:add unit 'Unit ' 1 20
+1699006545670:add bill 'Email' 1 'Pending'
+1699006552409:update bill 'Post' 1
+1699006576796:update bill 1 'Post'
+1699006595385:update bill 1 'Post' 1 'Pending'

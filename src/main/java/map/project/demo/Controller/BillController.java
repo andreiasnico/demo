@@ -18,7 +18,7 @@ public class BillController {
 
 
     @GetMapping("/bills")
-    public List<Bill> findAllBills(){
+    public List<Bill> findAllBills() {
         return service.findAllBills();
     }
 

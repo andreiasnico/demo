@@ -33,6 +33,20 @@ public class BillService {
         return bill;
     }
 
+    // crud operations
+
+    public void addBill(Bill bill) {
+        this.billRepository.save(bill);
+    }
+
+    public void update(Bill bill) {
+        this.billRepository.save(bill);
+    }
+
+    public void read(Bill bill) {
+        this.billRepository.findById(bill.getBillId());
+    }
+
     public void delete(Bill bill) {
         this.billRepository.delete(bill);
     }

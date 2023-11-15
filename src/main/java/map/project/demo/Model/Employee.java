@@ -33,5 +33,4 @@ public class Employee {
     @JoinColumn(name = "employeeId" , referencedColumnName = "employeeId")
     private EntryCard card;
 
-
 }
