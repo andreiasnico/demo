@@ -9,12 +9,16 @@ import map.project.demo.Service.BillService;
  * in order to get
  */
 public class Builder {
-    private BillService billService;
+    private final BillService billService;
+
+    public Builder(BillService billService) {
+        this.billService = billService;
+    }
 
     /**
      * we want to go and set all the bills that have no payment status to Pending
      */
-    private void setBillToUnayed() {
+    private void setBillToUnpayed() {
         this.billService.findAllBills().stream().filter(bill -> bill.getPaymentStatus() != PaymentStatus.Payed).
                 forEach(bill -> bill.setPaymentStatus(PaymentStatus.Pending));
     }
@@ -27,10 +31,9 @@ public class Builder {
                 forEach(bill -> bill.setDeliveryMethod(DeliveryMethods.Email));
     }
 
-
     public void execute() {
         this.setBillDelivery();
-        this.setBillToUnayed();
+        this.setBillToUnpayed();
     }
 
 }

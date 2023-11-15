@@ -32,4 +32,8 @@ public class BillService {
         this.billRepository.save(bill);
         return bill;
     }
+
+    public void delete(Bill bill) {
+        this.billRepository.delete(bill);
+    }
 }
