@@ -15,6 +15,7 @@ public class BillService {
     private BillRepository billRepository;
     //todo implementation of harder stuff than the repo
 
+
     public Optional<Bill> findByBillId(Long billId) {
         return Optional.ofNullable(this.billRepository.findByBillId(billId));
     }
@@ -31,6 +32,7 @@ public class BillService {
         this.billRepository.save(bill);
         return bill;
     }
+
     // crud operations
 
     public void addBill(Bill bill) {
