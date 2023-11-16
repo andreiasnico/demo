@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import map.project.demo.Model.States.State;
 
 import java.util.List;
 
@@ -32,5 +33,12 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeId" , referencedColumnName = "employeeId")
     private EntryCard card;
+    /**
+     * atribute for the state pattern
+     */
+    @Column(name = "state")
+    private State state;
+
+
 
 }

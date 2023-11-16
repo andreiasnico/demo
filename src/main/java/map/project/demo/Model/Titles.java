@@ -4,5 +4,6 @@ public enum Titles {
     Cleaning,
     Lawyer,
     Engineer,
-    Accountant
+    Accountant,
+    Handyman
 }
