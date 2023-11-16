@@ -20,10 +20,10 @@ public class Reading {
     private Long volumeReading;
 
     @ManyToOne
-    @JoinColumn(name="counterId")
+    @JoinColumn(name = "counterId")
     private Counter counter;
 
     @ManyToOne
-    @JoinColumn(name="billId")
+    @JoinColumn(name = "billId")
     private Bill bill;
 }
