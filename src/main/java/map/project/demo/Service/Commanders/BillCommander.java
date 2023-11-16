@@ -25,8 +25,15 @@ public  class BillCommander implements Commander{
      * we want to go and set all the bills that have no payment status to Pending
      */
     private void setBillToUnpayed() {
-        this.billService.findAllBills().stream().filter(bill -> bill.getPaymentStatus() != PaymentStatus.Payed).
-                forEach(bill -> bill.setPaymentStatus(PaymentStatus.Pending));
+//        this.billService.findAllBills().stream().filter(bill -> bill.getPaymentStatus() != PaymentStatus.Payed).
+//                forEach(bill -> bill.setPaymentStatus(PaymentStatus.Pending));
+
+        for (Bill b : this.billService.findAllBills()
+        ) {
+            if(b.getPaymentStatus() != PaymentStatus.Payed){
+                b.setPaymentStatus(PaymentStatus.Pending);
+            }
+        }
     }
 
     /**
