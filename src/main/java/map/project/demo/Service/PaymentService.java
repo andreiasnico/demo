@@ -21,4 +21,16 @@ public class PaymentService {
         paymentCommander.execute();
 
     }
+    public void deletePayment(Payment payment){
+        this.paymentRepository.delete(payment);
+        PaymentCommander paymentCommander = PaymentCommander.getInstance(this); //also a little overkill
+        paymentCommander.execute();
+    }
+
+    public void updatePayment(Payment payment){
+        this.paymentRepository.save(payment);
+        PaymentCommander paymentCommander = PaymentCommander.getInstance(this); //also a little overkill
+        paymentCommander.execute();
+    }
+
 }
