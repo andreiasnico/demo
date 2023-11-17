@@ -4,12 +4,16 @@ import map.project.demo.Model.*;
 import map.project.demo.Repository.BillRepository;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.Commanders.BillCommander;
+import map.project.demo.Service.PaymentService;
+import org.h2.command.dml.MergeUsing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.springframework.util.Assert;
 
 
@@ -23,8 +27,16 @@ public class TestPatterns {
 
     @Mock
     private BillRepository billRepository;
+
+    @Mock
+    private PaymentService paymentService;
+
     @Mock
     private Bill bill;
+
+    @Mock
+    private Payment payment;
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -35,27 +47,25 @@ public class TestPatterns {
      */
     @Test
     public void testObserver(){
-
-        Payment payment = new Payment();
-        Reading reading = new Reading();
-        List<Reading> readings = new ArrayList<>();
-        readings.add(reading);
-
+        //create objects
         bill.setBillId(1L);
         payment.setBill(bill);
-
-        payment.setAmount(1000L);
-        List<Payment> payments = new ArrayList<>();
-        payments.add(payment);
-        bill.setPayments(payments);
         assert (payment.getBillStatus() != BillStatus.Payed);
-        Mockito.when(bill.getReadings()).thenReturn(readings);
-        Mockito.when(bill.getAllReadingsSum() ).thenReturn(1000L);
-        bill.notifyPayments();
-        assert (payment.getBillStatus() == BillStatus.Payed);
+        Answer<Payment> answer = new Answer<Payment>() {
+            @Override
+            public Payment answer(InvocationOnMock invocationOnMock) throws Throwable {
+                payment.updateStatus();
+                return payment;
+            }
+        };
+        Mockito.doAnswer(answer).when(bill).notifyPayments();
+        assert(payment.getBillStatus() == BillStatus.Payed);
+
     }
 
-
+    /**
+     * test for the commander pattern
+     */
     @Test
     public void testCommander(){
         Bill bill = new Bill();

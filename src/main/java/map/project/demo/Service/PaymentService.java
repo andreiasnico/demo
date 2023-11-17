@@ -14,4 +14,10 @@ public class PaymentService {
     public List<Payment> findAllPayments(){
         return this.paymentRepository.findAll();
     }
+
+    public void addPayment(Payment payment){
+        this.paymentRepository.save(payment);
+        payment.getBill().notifyPayments(); // notify to get them updated
+
+    }
 }
