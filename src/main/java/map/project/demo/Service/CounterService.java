@@ -23,4 +23,8 @@ public class CounterService {
     public void delete(Counter counter) {
         counterRepository.delete(counter);
     }
+
+    public Counter findbyCounterId(Long counterId){
+        return this.counterRepository.findByCounterId(counterId);
+    }
 }
