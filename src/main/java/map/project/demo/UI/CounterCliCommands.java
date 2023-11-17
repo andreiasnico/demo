@@ -27,8 +27,8 @@ public class CounterCliCommands {
         counter.setCounterId(counterId);
         counter.setCounterTypes(CounterTypes.valueOf(type));
         counter.setPricePerUnit(unitPrice);
-        this.counterService.save(counter);
-        return "Counter has been saved";
+        return this.counterService.save(counter).toString();
+
     }
 
 }

@@ -34,8 +34,8 @@ public class ReadingCliCommands {
         reading.setReadingId(readingId);
         reading.setCounter(this.counterService.findbyCounterId(counterId));
         reading.setBill(this.billService.findByBillId(billId).get());
-        this.readingService.save(reading);
-        return "Reading has been saven";
+        return this.readingService.save(reading).toString();
+
     }
 
 

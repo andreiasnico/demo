@@ -60,3 +60,74 @@
 1699006552409:update bill 'Post' 1
 1699006576796:update bill 1 'Post'
 1699006595385:update bill 1 'Post' 1 'Pending'
+1700218635812:add unit
+1700218654274:add unit 'saragosa' 1 200
+1700218690610:add bill 'Post' 1 'Pending'
+1700218721674:add payment 1 1000 1
+1700218857876:add unit 'saragosa' 1 200
+1700218882459:add bill 1 'Post' 1 'Pending'
+1700218905025:add bill 'Post' 1 'Pending'
+1700218920617:add payment 1 1000 1
+1700218929856:stacktrace
+1700219219626:add counter 1 'Water' 2
+1700219229257:add Counter 1 'Water' 2
+1700219244433:add reading 1 1 1
+1700219278353:add payment 1 1000 1
+1700219283968:stacktrace
+1700219421586:add unit 'saragosa' 1 200
+1700219436754:add bill 'Email' 1 'Pending'
+1700219459169:add Counter 1 'Water' 2
+1700219542323:add unit 'saragosa' 1 200
+1700219554498:add bill 'Email' 1 'Pending'
+1700219568233:add Counter 1 'Water' 2
+1700219590792:add reading 1 1 1
+1700219609208:add payment 1 1000 1
+1700220016050:add unit 'saragosa' 1 200
+1700220036808:add bill 'Post' 1 'Pending'
+1700220052024:add Counter 1 'Water' 2
+1700220067928:add reading 1 1 1
+1700220079896:add payment 1 1000 1
+1700220121186:add unit 'saragosa' 1 200
+1700220140512:add bill 'Post' 1 'Pending'
+1700220154544:add Counter 1 'Water' 2
+1700220164824:add Reading 1 1 1
+1700220170927:add reading 1 1 1
+1700220252353:add unit 'saragosa' 1 200
+1700220261576:add bill 'Post' 1 'Pending'
+1700220279536:add Counter 1 'Water' 2
+1700220290600:add reading 1 1 1
+1700220355138:add unit 'saragosa' 1 200
+1700220365943:add bill 'Post' 1 'Pending'
+1700220378704:add Counter 1 'Water' 2
+1700220385720:add Reading 1 1 1
+1700220401071:add reading 1 1 1
+1700220438721:add unit 'saragosa' 1 200
+1700220446344:add bill 'Post' 1 'Pending'
+1700220453038:add Counter 1 'Water' 2
+1700220459383:add reading 1 1 1
+1700220482944:add Payment 1 1000 1
+1700220487967:add payment 1 1000 1
+1700220539786:add unit 'saragosa' 1 200
+1700220548624:add bill 'Post' 1 'Pending'
+1700220559912:add Counter 1 'Water' 2
+1700220574055:add reading 1 1 1
+1700220586384:add payment 1 1000 1
+1700220634746:add unit 'saragosa' 1 200
+1700220645983:add bill 'Post' 1 'Pending'
+1700220653488:add Counter 1 'Water' 2
+1700220662279:add reading 1 1 1
+1700220685751:add payment 1 1000 1
+1700220837450:add unit 'saragosa' 1 200
+1700220846128:add bill 'Post' 1 'Pending'
+1700220858296:add Counter 1 'Water' 2
+1700220863894:add reading 1 1 1
+1700220951985:add unit 'saragosa' 1 2
+1700220959927:add bill 'Post' 1 'Pending'
+1700220968175:add Counter 1 'Water' 2
+1700220977975:add reading 1 1 1
+1700221027816:add unit 'saragosa' 1 2
+1700221034942:add bill 'Post' 1 'Pending'
+1700221049551:add Counter 1 'Water' 2
+1700221062878:add reading 1 1 1
+1700221080333:add payment 1 1000 1
+1700221087438:stacktrace

@@ -30,7 +30,7 @@ public class PaymentCliCommands {
         payment.setPaymentId(paymentId);
         payment.setAmount(amount);
         payment.setBill(this.billService.findByBillId(billId).get());
-        this.paymentService.addPayment(payment);
-        return "payment has been added";
+        return this.paymentService.addPayment(payment).toString();
+
     }
 }

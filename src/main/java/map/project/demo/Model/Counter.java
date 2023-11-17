@@ -31,5 +31,12 @@ public class Counter {
     @OneToMany(mappedBy = "counter")
     List<Reading> readings;
 
-
+    @Override
+    public String toString() {
+        return "Counter{" +
+                "counterId=" + counterId +
+                ", counterTypes=" + counterTypes +
+                ", pricePerUnit=" + pricePerUnit +
+                '}';
+    }
 }

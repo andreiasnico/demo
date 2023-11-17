@@ -53,4 +53,9 @@ public class BillService {
     public void delete(Bill bill) {
         this.billRepository.delete(bill);
     }
+
+    public void updateBill(Bill bill){
+        Bill updatedBill = this.billRepository.findByBillId(bill.getBillId());
+        updatedBill.setPayments(bill.getPayments());
+    }
 }
