@@ -31,11 +31,6 @@ public class TestPatterns {
     @Mock
     private PaymentService paymentService;
 
-    @Mock
-    private Bill bill;
-
-    @Mock
-    private Payment payment;
 
     @BeforeEach
     public void setUp() {
@@ -46,20 +41,30 @@ public class TestPatterns {
      * test for the observer pattern
      */
     @Test
-    public void testObserver(){
-        //create objects
+    public void testObserver() {
+        Bill bill = new Bill();
+        Reading reading = new Reading();
+        Counter counter = new Counter();
+        List<Reading> readings = new ArrayList<>();
+        List<Payment> payments = new ArrayList<>();
+        Payment payment = new Payment();
+
         bill.setBillId(1L);
         payment.setBill(bill);
+        payment.setAmount(1000L);
+        payments.add(payment);
+        counter.setPricePerUnit(2);
+        reading.setBill(bill);
+        reading.setVolumeReading(500L);
+        reading.setCounter(counter);
+        readings.add(reading);
+        bill.setReadings(readings);
+        bill.setPayments(payments);
+
         assert (payment.getBillStatus() != BillStatus.Payed);
-        Answer<Payment> answer = new Answer<Payment>() {
-            @Override
-            public Payment answer(InvocationOnMock invocationOnMock) throws Throwable {
-                payment.updateStatus();
-                return payment;
-            }
-        };
-        Mockito.doAnswer(answer).when(bill).notifyPayments();
-        assert(payment.getBillStatus() == BillStatus.Payed);
+        bill.notifyPayments();
+        assert (payment.getBillStatus() == BillStatus.Payed);
+
 
     }
 
@@ -67,7 +72,7 @@ public class TestPatterns {
      * test for the commander pattern
      */
     @Test
-    public void testCommander(){
+    public void testCommander() {
         Bill bill = new Bill();
         bill.setBillId(1L);
         assert (bill.getPaymentStatus() != PaymentStatus.Payed);
