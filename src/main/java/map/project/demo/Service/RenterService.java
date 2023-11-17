@@ -1,5 +1,6 @@
 package map.project.demo.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import map.project.demo.Model.Renter;
@@ -7,6 +8,7 @@ import map.project.demo.Repository.RenterRepository;
 
 @Service
 public class RenterService {
+    @Autowired
     private RenterRepository renterRepository;
 
     public RenterService(RenterRepository renterRepository) {

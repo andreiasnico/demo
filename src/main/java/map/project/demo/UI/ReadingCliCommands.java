@@ -31,7 +31,7 @@ public class ReadingCliCommands {
                              @ShellOption(value = {"counterId"}, help = "id of the bill") Long counterId
                              ){
         Reading reading = new Reading();
-        reading.setReadingID(readingId);
+        reading.setReadingId(readingId);
         reading.setCounter(this.counterService.findbyCounterId(counterId));
         reading.setBill(this.billService.findByBillId(billId).get());
         this.readingService.save(reading);

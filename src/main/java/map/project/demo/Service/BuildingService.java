@@ -1,28 +1,29 @@
 package map.project.demo.Service;
 import map.project.demo.Model.Building;
 import map.project.demo.Model.Unit;
-import map.project.demo.Repository.UnitRepository;
+import map.project.demo.Repository.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class BuildingService {
     @Autowired
-    private UnitRepository unitRepository;
+    private BuildingRepository buildingRepository;
 
-    public Optional<Unit> findByUnitId(Long unitId) {
-        return unitRepository.findByUnitId(unitId);
+    public Optional<Building> findByUnitId(Long buildingId) {
+        return buildingRepository.findById(buildingId);
     }
 
-    public Unit save(Unit unit) {
-        unitRepository.save(unit);
-        return unit;
+    public Building save(Building building) {
+        buildingRepository.save(building);
+        return building;
     }
 
-    public Iterable<Unit> findAll() {
-        return unitRepository.findAll();
+    public List<Building> findAll() {
+        return buildingRepository.findAll();
     }
 
 

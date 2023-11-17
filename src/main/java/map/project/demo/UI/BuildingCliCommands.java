@@ -18,7 +18,7 @@ public class BuildingCliCommands {
 
     @ShellMethod(key = "Building", value = "list all buildings")
     public void findAllBuildings() {
-        for (Unit building : buildingService.findAll()) {
+        for (Building building : buildingService.findAll()) {
             System.out.println(building);
         }
 
