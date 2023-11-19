@@ -19,7 +19,7 @@ public class EmployeeService {
     public List<Employee> getEmployeesUnderWorked(){
         List<Employee> underWorkedEmployees = new ArrayList<>();
         for (Employee employee: this.employeeRepository.findAll()
-             ) {
+        ) {
             if(employee.getState() == State.FullTime){
                 FullTimeEmployee fullTimeEmployee = new FullTimeEmployee();
                 if(!fullTimeEmployee.handle(employee)){

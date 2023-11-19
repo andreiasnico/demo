@@ -14,7 +14,7 @@ public class Reading {
 
     @Id
     @GeneratedValue
-    private Long readingID;
+    private Long readingId;
 
     @Column(name = "volumeReading")
     private Long volumeReading;

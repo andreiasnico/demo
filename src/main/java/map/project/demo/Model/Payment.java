@@ -27,11 +27,22 @@ public class Payment {
     @Column(name = "deliveryMethod")
     private DeliveryMethods deliveryMethod;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "billId")
     private Bill bill;
 
     public void updateStatus(){
         this.billStatus = BillStatus.Payed;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "paymentId=" + paymentId +
+                ", bank='" + bank + '\'' +
+                ", amount=" + amount +
+                ", billStatus=" + billStatus +
+                ", deliveryMethod=" + deliveryMethod +
+                '}';
     }
 }

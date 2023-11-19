@@ -3,6 +3,7 @@ package map.project.demo.Service;
 import map.project.demo.Model.Bill;
 import map.project.demo.Model.Unit;
 import map.project.demo.Repository.BillRepository;
+import map.project.demo.Service.Commanders.BillCommander;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,8 @@ public class BillService {
 
     public void addBill(Bill bill) {
         this.billRepository.save(bill);
+        BillCommander billCommander = BillCommander.getInstance(this); // maybe this is a little overkill
+        billCommander.execute();
     }
 
     public void update(Bill bill) {
@@ -49,5 +52,10 @@ public class BillService {
 
     public void delete(Bill bill) {
         this.billRepository.delete(bill);
+    }
+
+    public void updateBill(Bill bill){
+        Bill updatedBill = this.billRepository.findByBillId(bill.getBillId());
+        updatedBill.setPayments(bill.getPayments());
     }
 }

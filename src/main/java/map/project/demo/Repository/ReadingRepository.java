@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReadingRepository extends JpaRepository<Reading,Long> {
+
+        Reading findByReadingId(Long id);
+
+        //Todo further implementation of all we need
 }

@@ -26,14 +26,14 @@ public class Bill {
     @Column(name = "paymentStatus")
     private PaymentStatus paymentStatus;
 
-    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
     List<Reading> readings;
 
     @ManyToOne
     @JoinColumn(name = "unitId")
     private Unit unit;
 
-    @OneToMany(mappedBy = "bill")
+    @OneToMany(mappedBy = "bill" , fetch = FetchType.EAGER)
     private List<Payment> payments;
 
     @Override
