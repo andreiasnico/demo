@@ -61,3 +61,16 @@
 1699006576796:update bill 1 'Post'
 1699006595385:update bill 1 'Post' 1 'Pending'
 1700394868969:add unit 'saragosa' 1 200
+1700394977513:add bill 'Post' 1 'Pending'
+1700394993909:units
+1700395299247:add unit 'saragosa' 1 200
+1700395301702:units
+1700395412440:add unit 'saragosa' 1 200
+1700395513000:add bill 'Post' 1 'Pending'
+1700395560518:add Counter 1 'Water' 2
+1700395590454:add reading 1 1 1
+1700395682982:add payment 1 1000 1
+1700395691220:stacktrace
+1700395744920:add payment 1 1000 1
+1700395893388:payments
+1700395905821:Payment

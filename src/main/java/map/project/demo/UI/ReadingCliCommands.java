@@ -26,16 +26,15 @@ public class ReadingCliCommands {
 
 
     @ShellMethod(key = "add reading" , value = "add a new reading")
-    public String addReading(@ShellOption(value = {"readingId"}, help = "id of the reading") Long readingId,
+    public String addReading(@ShellOption(value = {"volume"}, help = "volume of the counter") Long volume,
                              @ShellOption(value = {"billId"}, help = "id of the bill") Long billId,
                              @ShellOption(value = {"counterId"}, help = "id of the bill") Long counterId
                              ){
         Reading reading = new Reading();
-        reading.setReadingId(readingId);
+        reading.setVolumeReading(volume);
         reading.setCounter(this.counterService.findbyCounterId(counterId));
         reading.setBill(this.billService.findByBillId(billId).get());
         return this.readingService.save(reading).toString();
-
     }
 
 

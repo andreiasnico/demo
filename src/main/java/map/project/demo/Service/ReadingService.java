@@ -26,9 +26,6 @@ public class ReadingService {
     public Reading save(Reading reading) {
         readingRepository.save(reading);
         Optional<Bill> testBill = this.billService.findByBillId(reading.getBill().getBillId());
-        List<Reading> readings = testBill.get().getReadings();
-        readings.add(reading);
-        testBill.get().setReadings(readings);
         this.billService.updateBill(testBill.get());
         return reading;
     }

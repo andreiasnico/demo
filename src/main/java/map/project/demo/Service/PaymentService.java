@@ -26,9 +26,6 @@ public class PaymentService {
         this.paymentRepository.save(payment);
 
         Optional<Bill> testBill = this.billService.findByBillId(payment.getBill().getBillId());
-        List<Payment> payments = testBill.get().getPayments();
-        payments.add(payment);
-        testBill.get().setPayments(payments);
         this.billService.updateBill(testBill.get());
         payment.getBill().notifyPayments(); // notify to get them updated
         return payment;
