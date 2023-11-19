@@ -37,4 +37,8 @@ public class ReadingService {
     public void delete(Reading reading) {
         readingRepository.delete(reading);
     }
+
+    public Reading findReadingById(Long readingId){
+        return this.findReadingById(readingId);
+    }
 }

@@ -31,14 +31,14 @@ public class Unit {
     @JoinColumn(name = "buildingId")
     private Building building;
 
-    @OneToMany(mappedBy = "unit")
+    @OneToMany(mappedBy = "unit" , cascade = CascadeType.ALL)
     List<Bill> bills;
 
     @ManyToOne
     @JoinColumn(name = "renterId")
     private Renter renter;
 
-    @OneToMany(mappedBy = "unit", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "unit", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private List<EmployeeSchedule> employeeSchedules;
 
     @Override

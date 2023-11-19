@@ -37,5 +37,12 @@ public class ReadingCliCommands {
         return this.readingService.save(reading).toString();
     }
 
+    @ShellMethod(key = "delete reading" , value = "delete reading by id")
+    public String deleteReading(@ShellOption(value = {"readingId"} , help = "id of the reading") Long readingId){
+        Reading reading = this.readingService.findReadingById(readingId);
+        this.readingService.delete(reading);
+        return "Reading has been removed";
+    }
+
 
 }

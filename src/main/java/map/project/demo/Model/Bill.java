@@ -33,7 +33,7 @@ public class Bill {
     @JoinColumn(name = "unitId")
     private Unit unit;
 
-    @OneToMany(mappedBy = "bill" , fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bill" , fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     private List<Payment> payments;
 
     @Override

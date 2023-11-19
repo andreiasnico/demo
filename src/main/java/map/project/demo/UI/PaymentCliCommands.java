@@ -22,15 +22,20 @@ public class PaymentCliCommands {
     }
 
     @ShellMethod(key = "add payment" , value = "create a payment")
-    public String addPayment(@ShellOption(value = {"paymentId"}, help = "id of the payment") Long paymentId ,
+    public String addPayment(
                              @ShellOption(value = {"amount"}, help = "volume of entity") Long amount,
                              @ShellOption(value = {"billId"}, help = "id of the bill") Long billId
                              ){
         Payment payment = new Payment();
-        payment.setPaymentId(paymentId);
         payment.setAmount(amount);
         payment.setBill(this.billService.findByBillId(billId).get());
         return this.paymentService.addPayment(payment).toString();
+    }
 
+    @ShellMethod(key = "delete payment" , value = "delete payment by id")
+    public String deletePayment(@ShellOption(value = {"paymentId"} , help = "id of paymnent") Long paymentId){
+        Payment payment = this.paymentService.findPaymentById(paymentId);
+        this.paymentService.delete(payment);
+        return "Payment has been deleted";
     }
 }

@@ -2,6 +2,7 @@ package map.project.demo.Service;
 import org.springframework.stereotype.Service;
 import map.project.demo.Model.Counter;
 import map.project.demo.Repository.CounterRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CounterService {
@@ -22,6 +23,10 @@ public class CounterService {
 
     public void delete(Counter counter) {
         counterRepository.delete(counter);
+    }
+
+    public void deleteCounterById(Long counterId){
+        this.counterRepository.deleteCounterByCounterId(counterId);
     }
 
     public Counter findbyCounterId(Long counterId){

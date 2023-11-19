@@ -5,6 +5,7 @@ import map.project.demo.Model.Payment;
 import map.project.demo.Repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,17 @@ public class PaymentService {
         this.billService.updateBill(testBill.get());
         payment.getBill().notifyPayments(); // notify to get them updated
         return payment;
+    }
 
+    public void deletePaymentById(Long paymentId){
+        this.paymentRepository.deleteByPaymentId(paymentId);
+    }
+
+    public Payment findPaymentById(Long id){
+        return this.paymentRepository.findByPaymentId(id);
+    }
+
+    public void delete(Payment payment){
+        this.paymentRepository.delete(payment);
     }
 }

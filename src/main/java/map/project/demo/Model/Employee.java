@@ -27,7 +27,7 @@ public class Employee {
     @Column(name = "salary")
     private Long salary;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL)
     private List<EmployeeSchedule> employeeSchedules;
 
     @OneToOne(cascade = CascadeType.ALL)

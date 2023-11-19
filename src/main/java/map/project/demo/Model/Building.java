@@ -28,7 +28,7 @@ public class Building {
     @Column(name = "numberOfStories")
     private int numberOfStories;
 
-    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     List<Unit> units;
 
 }

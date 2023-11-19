@@ -28,7 +28,7 @@ public class Counter {
     @Column(name = "checkingDate")
     private Date checkingDate;
 
-    @OneToMany(mappedBy = "counter")
+    @OneToMany(mappedBy = "counter" , cascade = CascadeType.ALL)
     List<Reading> readings;
 
     @Override

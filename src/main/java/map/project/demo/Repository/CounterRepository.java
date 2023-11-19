@@ -9,5 +9,7 @@ public interface CounterRepository extends JpaRepository<Counter , Long> {
 
         Counter findByCounterId(Long id);
 
+        Counter deleteCounterByCounterId(Long id);
+
     //Todo further implementation of all we need
 }

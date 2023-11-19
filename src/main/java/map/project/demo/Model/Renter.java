@@ -26,9 +26,9 @@ public class Renter {
     @Column(name = "IBAN")
     private String IBAN;
 
-    @OneToMany(mappedBy = "renter")
+    @OneToMany(mappedBy = "renter" , cascade = CascadeType.ALL)
     List<RenterEmployee> renterEmployees;
 
-    @OneToMany(mappedBy = "renter")
+    @OneToMany(mappedBy = "renter" , cascade = CascadeType.ALL)
     List<Unit> units;
 }

@@ -9,5 +9,8 @@ public interface PaymentRepository extends JpaRepository<Payment , Long> {
 
         Payment findByPaymentId(Long id);
 
+        void deleteByPaymentId(Long id);
+
+
         //Todo further implementation of all we need
 }

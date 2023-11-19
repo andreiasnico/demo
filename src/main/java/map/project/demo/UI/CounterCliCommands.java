@@ -19,16 +19,21 @@ public class CounterCliCommands {
     }
 
     @ShellMethod(key = "add Counter" , value = "create a counter")
-    public String addCounter(@ShellOption(value = {"counterId"}, help = "id of the bill") Long counterId,
+    public String addCounter(
                              @ShellOption(value = {"type"}, help = "counter type") String type,
                              @ShellOption(value = {"unitPrice"}, help = "id of the bill") Long unitPrice
                              ){
         Counter counter = new Counter();
-        counter.setCounterId(counterId);
         counter.setCounterTypes(CounterTypes.valueOf(type));
         counter.setPricePerUnit(unitPrice);
         return this.counterService.save(counter).toString();
+    }
 
+    @ShellMethod(key = "delete counter" , value="delete counter by id")
+    public String deleteCounter(@ShellOption(value = {"counterId"} , help = "id of the counter") Long counterId){
+        Counter counter = this.counterService.findbyCounterId(counterId);
+        this.counterService.delete(counter);
+        return "Counter has been deleted";
     }
 
 }
