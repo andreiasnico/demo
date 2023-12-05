@@ -31,4 +31,17 @@ public class Building {
     @OneToMany(mappedBy = "building", fetch = FetchType.EAGER , cascade = CascadeType.ALL)
     List<Unit> units;
 
+    public String getAddress() {
+        return street + ", " + town;
+    }
+
+    public void setAddress(String address) {
+        String[] parts = address.split(", ");
+        this.street = parts[0];
+        this.town = parts[1];
+    }
+
+    public void setUnit(Unit unit) {
+        this.units.add(unit);
+    }
 }

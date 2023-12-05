@@ -29,4 +29,20 @@ public class UnitService {
     public void delete(Unit unit) {
         unitRepository.delete(unit);
     }
+
+    public void addUnit(Unit unit) {
+        unitRepository.save(unit);
+    }
+
+    public void updateUnit(Unit unit) {
+        Unit updatedUnit = unitRepository.findById(unit.getUnitId()).get();
+        updatedUnit.setUnitId(unit.getUnitId());
+        unitRepository.save(updatedUnit);
+    }
+
+    public void readUnit(Unit unit) {
+        unitRepository.findById(unit.getUnitId());
+    }
+
+
 }

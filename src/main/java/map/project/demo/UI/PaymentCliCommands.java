@@ -38,4 +38,25 @@ public class PaymentCliCommands {
         this.paymentService.delete(payment);
         return "Payment has been deleted";
     }
+
+    @ShellMethod(key = "update payment" , value="update payment by id")
+    public String updatePayment(@ShellOption(value = {"paymentId"} , help = "id of the payment") Long paymentId,
+                                @ShellOption(value = {"amount"}, help = "volume of entity") Long amount,
+                                @ShellOption(value = {"billId"}, help = "id of the bill") Long billId){
+        Payment payment = new Payment();
+        payment.setPaymentId(paymentId);
+        payment.setAmount(amount);
+        payment.setBill(this.billService.findByBillId(billId).get());
+        this.paymentService.updatePayment(payment);
+        return "Payment has been updated";
+    }
+
+    @ShellMethod(key = "read payment" , value="read payment by id")
+    public String readPayment(@ShellOption(value = {"paymentId"} , help = "id of the payment") Long paymentId){
+        Payment payment = new Payment();
+        payment.setPaymentId(paymentId);
+        this.paymentService.readPayment(payment);
+        return "Payment has been read";
+    }
+
 }

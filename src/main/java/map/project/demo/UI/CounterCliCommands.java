@@ -36,4 +36,24 @@ public class CounterCliCommands {
         return "Counter has been deleted";
     }
 
+    @ShellMethod(key = "update counter" , value="update counter by id")
+    public String updateCounter(@ShellOption(value = {"counterId"} , help = "id of the counter") Long counterId,
+                                @ShellOption(value = {"type"}, help = "counter type") String type,
+                                @ShellOption(value = {"unitPrice"}, help = "id of the bill") Long unitPrice){
+        Counter counter = new Counter();
+        counter.setCounterId(counterId);
+        counter.setCounterTypes(CounterTypes.valueOf(type));
+        counter.setPricePerUnit(unitPrice);
+        this.counterService.updateCounter(counter);
+        return "Counter has been updated";
+    }
+
+    @ShellMethod(key = "read counter" , value="read counter by id")
+    public String readCounter(@ShellOption(value = {"counterId"} , help = "id of the counter") Long counterId){
+        Counter counter = new Counter();
+        counter.setCounterId(counterId);
+        this.counterService.readCounter(counter);
+        return "Counter has been read";
+    }
+
 }

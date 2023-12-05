@@ -32,4 +32,18 @@ public class CounterService {
     public Counter findbyCounterId(Long counterId){
         return this.counterRepository.findByCounterId(counterId);
     }
+
+    public void updateCounter(Counter counter) {
+        Counter updatedCounter = counterRepository.findByCounterId(counter.getCounterId());
+        updatedCounter.setCounterId(counter.getCounterId());
+        counterRepository.save(updatedCounter);
+    }
+
+    public void readCounter(Counter counter) {
+        counterRepository.findByCounterId(counter.getCounterId());
+    }
+
+    public void addCounter(Counter counter) {
+        counterRepository.save(counter);
+    }
 }

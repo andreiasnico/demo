@@ -43,4 +43,17 @@ public class PaymentService {
     public void delete(Payment payment){
         this.paymentRepository.delete(payment);
     }
+
+    public void updatePayment(Payment payment) {
+        Payment updatedPayment = paymentRepository.findByPaymentId(payment.getPaymentId());
+        updatedPayment.setAmount(payment.getAmount());
+        updatedPayment.setBill(payment.getBill());
+        paymentRepository.save(updatedPayment);
+    }
+
+    public void readPayment(Payment payment) {
+        paymentRepository.findById(payment.getPaymentId());
+    }
+
+
 }

@@ -35,4 +35,26 @@ public class EmployeeService {
         }
         return underWorkedEmployees;
     }
+
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    public void updateEmployee(Employee employee) {
+        Employee updatedEmployee = employeeRepository.findById(employee.getEmployeeId()).get();
+        updatedEmployee.setState(employee.getState());
+        employeeRepository.save(updatedEmployee);
+    }
+
+    public void readEmployee(Employee employee) {
+        employeeRepository.findById(employee.getEmployeeId());
+    }
+
+    public Object save(Employee addEmployee) {
+        return null;
+    }
 }

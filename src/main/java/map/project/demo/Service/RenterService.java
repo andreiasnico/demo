@@ -25,7 +25,23 @@ public class RenterService {
         return renterRepository.findAll();
     }
 
-    public void delete(Renter renter) {
-        renterRepository.delete(renter);
+
+
+    public void addRenter(Renter renter) {
+        renterRepository.save(renter);
+    }
+
+    public void updateRenter(Renter renter) {
+        Renter updatedRenter = renterRepository.findById(renter.getRenterId()).get();
+        updatedRenter.setRenterId(renter.getRenterId());
+        renterRepository.save(updatedRenter);
+    }
+
+    public void readRenter(Renter renter) {
+        renterRepository.findById(renter.getRenterId());
+    }
+
+    public void deleteRenter(Renter deleteRenter) {
+        renterRepository.delete(deleteRenter);
     }
 }

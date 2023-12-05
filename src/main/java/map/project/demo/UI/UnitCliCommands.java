@@ -57,5 +57,15 @@ public class UnitCliCommands {
         return "Unit deleted";
     }
 
+    @ShellMethod(key = "read unit", value = "read a unit from our database")
+    public String readUnit(@ShellOption(value = {"unitId"}, help = "id of the unit") Long unitId) {
+        Optional<Unit> unit = unitService.findByUnitId(unitId);
+        if (unit.equals(Optional.empty())) {
+            return "There is no unit with this id";
+        }
+        this.unitService.readUnit(unit.get());
+        return "Unit read";
+    }
+
 
 }

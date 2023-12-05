@@ -24,7 +24,30 @@ public class BuildingService {
 
     public List<Building> findAll() {
         return buildingRepository.findAll();
+
     }
+
+    public void deleteBuilding(Building building) {
+        buildingRepository.delete(building);
+    }
+
+    public void addBuilding(Building building) {
+        buildingRepository.save(building);
+    }
+
+    public void updateBuilding(Building building) {
+        Building updatedBuilding = buildingRepository.findById(building.getBuildingId()).get();
+        updatedBuilding.setStreet(building.getAddress());
+        updatedBuilding.setUnits(building.getUnits());
+        buildingRepository.save(updatedBuilding);
+    }
+
+    public void readBuilding(Building building) {
+        buildingRepository.findById(building.getBuildingId());
+    }
+
+
+
 
 
 
