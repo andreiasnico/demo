@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalTime;
 
@@ -13,7 +14,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 
-public class EmployeeSchedule {
+public class EmployeeSchedule implements Serializable {
 
     @EmbeddedId
     private ScheduleKey scheduleKey;

@@ -12,6 +12,5 @@ public interface ReadingRepository extends JpaRepository<Reading,Long> {
 
         boolean removeByReadingId(Long id);
 
-
         //Todo further implementation of all we need
 }

@@ -42,5 +42,4 @@ public class ReadingService {
         return this.findReadingById(readingId);
     }
 
-
 }

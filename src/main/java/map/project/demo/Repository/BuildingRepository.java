@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BuildingRepository extends JpaRepository<Building , Long> {
-
-
+    Building findByBuildingId(Long buildingId);
 
 }

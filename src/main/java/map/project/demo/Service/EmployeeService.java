@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -50,11 +51,26 @@ public class EmployeeService {
         employeeRepository.save(updatedEmployee);
     }
 
-    public void readEmployee(Employee employee) {
-        employeeRepository.findById(employee.getEmployeeId());
+    public Employee readEmployee(Long employeeId) {
+        return employeeRepository.findById(employeeId).get();
     }
 
     public Object save(Employee addEmployee) {
+        return null;
+    }
+
+    /**
+     * method that finds employee by id
+     * @param employeeId employee Id
+     * @return employee / null
+     * if there is none we throw an exception
+     */
+    public Employee findEmployeeById(Long employeeId){
+        try{
+            return this.employeeRepository.findByEmployeeId(employeeId);
+        }catch (Exception e){
+            System.out.println("there is no employee with this employee");
+        }
         return null;
     }
 }

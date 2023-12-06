@@ -13,4 +13,5 @@ public class ScheduleKey implements Serializable {
 
     @Column(name = "unitId")
     private Long unitId;
+
 }

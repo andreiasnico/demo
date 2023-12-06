@@ -46,7 +46,9 @@ public class BuildingService {
         buildingRepository.findById(building.getBuildingId());
     }
 
-
+    public Building findBuildingById(Long buildingId){
+        return this.buildingRepository.findByBuildingId(buildingId);
+    }
 
 
 

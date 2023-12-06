@@ -15,6 +15,9 @@ import javax.swing.text.html.Option;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * class for the command line interface for the bill class
+ */
 @ShellComponent
 public class BillCliCommands {
     @Autowired
@@ -22,11 +25,22 @@ public class BillCliCommands {
     @Autowired
     private UnitService unitService;
 
+    /**
+     * method that prints out a list of all the bills our database
+     *
+     * @return String of the list of bills
+     */
     @ShellMethod(key = "bills", value = "show all bills")
     public String allBills() {
         return billService.findAllBills().toString();
     }
 
+    /**
+     * method that prints out the bills from a single unit
+     *
+     * @param unitId the id of the unit
+     * @return String of the list of the biils
+     */
     @ShellMethod(key = "by unit", value = "show all bills from a unit ")
     public String allBillsFromUnit(@ShellOption(value = {"unitId"}, help = "Id of the unit") Long unitId) {
         Optional<Unit> unit = unitService.findByUnitId(unitId);
@@ -36,6 +50,14 @@ public class BillCliCommands {
         return billService.findAllBillsByUnit(unit.get()).toString();
     }
 
+    /**
+     * method that adds a bill to the database
+     *
+     * @param deliveryMethod delivery method of the bill
+     * @param unitId         id of the unit which the bill goes to
+     * @param status         status of the payment of the bill
+     * @return String of the new bill added
+     */
     @ShellMethod(key = "add bill", value = "add a bill to our database")
     public String addBill(@ShellOption(value = {"delivery"}, help = "delivery method for the bill") String deliveryMethod,
                           @ShellOption(value = {"unit"}, help = "the unit to which it belongs mapped by id") Long unitId,
@@ -45,20 +67,29 @@ public class BillCliCommands {
             return "There is no unit with this id";
         }
         PaymentStatus paymentStatus = PaymentStatus.valueOf(status);
-        DeliveryMethods delivery = DeliveryMethods.valueOf(DeliveryMethods.class , deliveryMethod);
+        DeliveryMethods delivery = DeliveryMethods.valueOf(DeliveryMethods.class, deliveryMethod);
         Bill addBill = new Bill();
-        if(unitId != null) {
+        if (unitId != null) {
             addBill.setUnit(unit.get());
         }
-        if(!deliveryMethod.equals("")) {
+        if (!deliveryMethod.equals("")) {
             addBill.setDeliveryMethod(delivery);
         }
-        if(!status.equals("")) {
+        if (!status.equals("")) {
             addBill.setPaymentStatus(paymentStatus);
         }
         return this.billService.save(addBill).toString();
     }
 
+    /**
+     * method that updates the bill
+     *
+     * @param billId         id of the bill which we want to update
+     * @param deliveryMethod delivery method of the bill
+     * @param unitId         id of the unit which the bill goes to
+     * @param status         status of the payment of the bill
+     * @return String of the updated bill
+     */
     @ShellMethod(key = "update bill", value = "update a bill from our database")
     public String updateBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId,
                              @ShellOption(value = {"delivery"}, help = "delivery method for the bill") String deliveryMethod,
@@ -81,6 +112,12 @@ public class BillCliCommands {
         return this.billService.save(updateBill).toString();
     }
 
+    /**
+     * method that deletes a bill from the database
+     *
+     * @param billId id of the bill we want deleted
+     * @return String of whether the bill was deleted or not
+     */
     @ShellMethod(key = "delete bill", value = "delete a bill from our database")
     public String deleteBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
@@ -91,6 +128,12 @@ public class BillCliCommands {
         return "Bill deleted";
     }
 
+    /**
+     * method that returns a bill based on id
+     *
+     * @param billId
+     * @return String of the bill we want to see
+     */
     @ShellMethod(key = "read bill", value = "read a bill from our database")
     public String readBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
