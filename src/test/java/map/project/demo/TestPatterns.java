@@ -5,17 +5,11 @@ import map.project.demo.Repository.BillRepository;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.Commanders.BillCommander;
 import map.project.demo.Service.PaymentService;
-import org.h2.command.dml.MergeUsing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.springframework.util.Assert;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,4 +81,48 @@ public class TestPatterns {
         commander.execute();
         assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
     }
+
+    /**
+     * test for the strategy pattern
+     */
+    @Test
+    public void testStrategy() {
+        Bill bill = new Bill();
+        bill.setBillId(1L);
+        bill.setPaymentStatus(PaymentStatus.Pending);
+        List<Bill> bills = new ArrayList<>();
+        bills.add(bill);
+        this.billService.addBill(bill);
+        Mockito.when(this.billService.findByBillId(1L)).thenReturn(Optional.of(bill));
+        Mockito.when(this.billService.findAllBills()).thenReturn(bills);
+        BillCommander commander = BillCommander.getInstance(this.billService);
+        commander.execute();
+        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
+        bill.setPaymentStatus(PaymentStatus.Payed);
+        commander.execute();
+        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Payed);
+    }
+
+    /**
+     * test for the template pattern
+     */
+    @Test
+
+    public void testTemplate() {
+        Bill bill = new Bill();
+        bill.setBillId(1L);
+        bill.setPaymentStatus(PaymentStatus.Pending);
+        List<Bill> bills = new ArrayList<>();
+        bills.add(bill);
+        this.billService.addBill(bill);
+        Mockito.when(this.billService.findByBillId(1L)).thenReturn(Optional.of(bill));
+        Mockito.when(this.billService.findAllBills()).thenReturn(bills);
+        BillCommander commander = BillCommander.getInstance(this.billService);
+        commander.execute();
+        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
+        bill.setPaymentStatus(PaymentStatus.Payed);
+        commander.execute();
+        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Payed);
+    }
+
 }

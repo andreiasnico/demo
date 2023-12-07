@@ -9,6 +9,7 @@ public  class BillCommander implements Commander{
     private final BillService billService;
 
     private static BillCommander instance = null;
+    private Object bill;
 
 
     private BillCommander(BillService billService) {
@@ -48,4 +49,6 @@ public  class BillCommander implements Commander{
         this.setBillDelivery();
         this.setBillToUnpayed();
     }
+
+
 }
