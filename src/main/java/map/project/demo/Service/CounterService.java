@@ -1,8 +1,8 @@
 package map.project.demo.Service;
-import org.springframework.stereotype.Service;
+
 import map.project.demo.Model.Counter;
 import map.project.demo.Repository.CounterRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CounterService {
@@ -45,5 +45,10 @@ public class CounterService {
 
     public void addCounter(Counter counter) {
         counterRepository.save(counter);
+    }
+
+
+    public Object findAllCounters() {
+        return findAll();
     }
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -72,5 +71,9 @@ public class EmployeeService {
             System.out.println("there is no employee with this employee");
         }
         return null;
+    }
+
+    public Object findAllEmployees() {
+        return this.employeeRepository.findAll();
     }
 }

@@ -67,4 +67,8 @@ public class EmployeeScheduleService {
         }
         return null;
     }
+
+    public Object findAllEmployeeSchedules() {
+        return findAllSchedules();
+    }
 }
