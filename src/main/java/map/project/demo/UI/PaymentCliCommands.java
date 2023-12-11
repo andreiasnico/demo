@@ -51,7 +51,7 @@ public class PaymentCliCommands {
         Payment payment = new Payment();
         payment.setAmount(amount);
         payment.setBank(bank);
-        payment.setDeliveryMethod(DeliveryMethods.valueOf(delivery));
+        payment.setDeliveryMethods(DeliveryMethods.valueOf(delivery));
         payment.setBill(this.billService.findByBillId(billId).get());
         return this.paymentService.addPayment(payment).toString();
     }
@@ -76,7 +76,7 @@ public class PaymentCliCommands {
                                 @ShellOption(value = {"amount"}, help = "volume of entity") Long amount,
                                 @ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Payment payment = this.paymentService.findPaymentById(paymentId);
-        payment.setPaymentId(paymentId);
+        payment.setBankStatmentId(paymentId);
         payment.setAmount(amount);
         payment.setBill(this.billService.findByBillId(billId).get());
         this.paymentService.updatePayment(payment);

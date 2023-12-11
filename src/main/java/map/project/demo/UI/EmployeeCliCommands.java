@@ -18,7 +18,7 @@ public class EmployeeCliCommands {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private UnitService employeeRepository;
+    private UnitService unitService;
 
     /**
      * method that shows all employees
@@ -27,7 +27,7 @@ public class EmployeeCliCommands {
      */
     @ShellMethod(key = "employee", value = "show all employees")
     public String allEmployees() {
-        return employeeRepository.findAll().toString();
+        return employeeService.getEmployeesUnderWorked().toString();
     }
 
     /**

@@ -40,13 +40,13 @@ public class BillServiceTest {
         // Arrange
         Long billId = 1L;
         Bill mockBill = new Bill();
-        when(billRepository.findByBillId(billId)).thenReturn(mockBill);
+        when(billRepository.findByBankStatmentId(billId)).thenReturn(mockBill);
 
         // Act
         Optional<Bill> result = billService.findByBillId(billId);
 
         // Assert
-        verify(billRepository).findByBillId(billId);
+        verify(billRepository).findByBankStatmentId(billId);
         assertEquals(Optional.of(mockBill), result);
     }
 
@@ -54,7 +54,7 @@ public class BillServiceTest {
     public void testFindAllBills() {
         // Arrange
         List<Bill> mockBills = Arrays.asList(new Bill(), new Bill());
-        mockBills.get(0).setDeliveryMethod(DeliveryMethods.Email);
+        mockBills.get(0).setDeliveryMethods(DeliveryMethods.Email);
         when(billRepository.findAll()).thenReturn(mockBills);
 
         // Act

@@ -93,3 +93,20 @@
 1700397576731:delete counter 1
 1700397581643:delete reading 1
 1700397626267:Counter
+1702033961179:add building 'anton pann' . 3 , 'central'
+1702033974856:add building 'anton pann' , 3 , 'central'
+1702033986128:add building 'anton pann' 3 'central'
+1702034036831:bills
+1702034061393:add building 'anton pann' 3 'Central'
+1702034132577:add building 'sss' 3 'aaa'
+1702034139198:stacktrace
+1702034390578:add Renter 'FFF' 'adn' '12312'
+1702034402599:add renter 'fff' 'adn' '123'
+1702034441664:add renter employee 'vasile' '1999-10-10' 1
+1702034451342:stacktrace
+1702034513871:renters
+1702034524068:Renters
+1702034536581:Renter
+1702034698183:add renter employee 'vasile' '1999-11-11' 1
+1702034708029:renter employees
+1702034748502:Renter

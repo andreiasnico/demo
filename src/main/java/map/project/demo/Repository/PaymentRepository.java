@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment , Long> {
 
-        Payment findByPaymentId(Long id);
+        Payment findByBankStatmentId(Long id);
 
-        void deleteByPaymentId(Long id);
+        void deleteByBankStatmentId(Long id);
 
 
         //Todo further implementation of all we need

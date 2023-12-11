@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long> {
 
-    Bill findByBillId(Long id);
+    Bill findByBankStatmentId(Long billId);
 
     List<Bill> findAllByUnit(Unit unit);
 

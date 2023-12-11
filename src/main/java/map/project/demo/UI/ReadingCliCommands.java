@@ -1,6 +1,5 @@
 package map.project.demo.UI;
 
-import map.project.demo.Model.BillStatus;
 import map.project.demo.Model.Reading;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.CounterService;

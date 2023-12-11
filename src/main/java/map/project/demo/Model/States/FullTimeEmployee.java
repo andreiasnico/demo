@@ -8,7 +8,7 @@ import java.time.Duration;
 public class FullTimeEmployee implements StateInterface {
 
     /**
-     * handle for stae design pattern
+     * handle for state design pattern
      * @return true or false on the question : does the employee have enough or more hours to work
      */
     @Override

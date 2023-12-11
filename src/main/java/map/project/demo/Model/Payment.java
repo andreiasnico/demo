@@ -10,10 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "Payment")
-public class Payment {
-    @Id
-    @GeneratedValue
-    private Long paymentId;
+public class Payment extends BankStatment{
 
     @Column(name = "bank")
     private String bank;
@@ -21,28 +18,23 @@ public class Payment {
     @Column(name = "amount")
     private Long amount;
 
-    @Column(name = "billStatus")
-    private BillStatus billStatus ;
-
-    @Column(name = "deliveryMethod")
-    private DeliveryMethods deliveryMethod;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "billId")
     private Bill bill;
 
     public void updateStatus(){
-        this.billStatus = BillStatus.Payed;
+        this.paymentStatus = PaymentStatus.Payed;
+
     }
 
     @Override
     public String toString() {
         return "Payment{" +
-                "paymentId=" + paymentId +
+                "paymentId=" + bankStatmentId +
                 ", bank='" + bank + '\'' +
                 ", amount=" + amount +
-                ", billStatus=" + billStatus +
-                ", deliveryMethod=" + deliveryMethod +
+                ", billStatus=" + paymentStatus +
+                ", deliveryMethod=" + deliveryMethods +
                 '}';
     }
 }

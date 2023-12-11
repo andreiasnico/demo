@@ -2,6 +2,7 @@ package map.project.demo.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "Building")
 public class Building {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buildingId;
 
     @Column(name = "name")

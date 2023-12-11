@@ -26,9 +26,19 @@ public class Renter {
     @Column(name = "IBAN")
     private String IBAN;
 
-    @OneToMany(mappedBy = "renter" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "renter" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     List<RenterEmployee> renterEmployees;
 
     @OneToMany(mappedBy = "renter" , cascade = CascadeType.ALL)
     List<Unit> units;
+
+    @Override
+    public String toString() {
+        return "Renter{" +
+                "renterId=" + renterId +
+                ", firmName='" + firmName + '\'' +
+                ", email='" + email + '\'' +
+                ", IBAN='" + IBAN + '\'' +
+                '}';
+    }
 }

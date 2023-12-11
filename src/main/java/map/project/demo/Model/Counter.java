@@ -16,7 +16,7 @@ import java.util.List;
 public class Counter {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long counterId;
 
     @Column(name = "counterTypes")
@@ -39,4 +39,5 @@ public class Counter {
                 ", pricePerUnit=" + pricePerUnit +
                 '}';
     }
+
 }

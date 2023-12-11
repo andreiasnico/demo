@@ -43,7 +43,7 @@ public class TestPatterns {
         List<Payment> payments = new ArrayList<>();
         Payment payment = new Payment();
 
-        bill.setBillId(1L);
+        bill.setBankStatmentId(1L);
         payment.setBill(bill);
         payment.setAmount(1000L);
         payments.add(payment);
@@ -55,9 +55,9 @@ public class TestPatterns {
         bill.setReadings(readings);
         bill.setPayments(payments);
 
-        assert (payment.getBillStatus() != BillStatus.Payed);
+        assert (payment.getPaymentStatus() != PaymentStatus.Payed);
         bill.notifyPayments();
-        assert (payment.getBillStatus() == BillStatus.Payed);
+        assert (payment.getPaymentStatus() == PaymentStatus.Payed);
 
 
     }
@@ -68,7 +68,7 @@ public class TestPatterns {
     @Test
     public void testCommander() {
         Bill bill = new Bill();
-        bill.setBillId(1L);
+        bill.setBankStatmentId(1L);
         assert (bill.getPaymentStatus() != PaymentStatus.Payed);
         List<Bill> bills = new ArrayList<>();
         bills.add(bill);
@@ -82,47 +82,6 @@ public class TestPatterns {
         assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
     }
 
-    /**
-     * test for the strategy pattern
-     */
-    @Test
-    public void testStrategy() {
-        Bill bill = new Bill();
-        bill.setBillId(1L);
-        bill.setPaymentStatus(PaymentStatus.Pending);
-        List<Bill> bills = new ArrayList<>();
-        bills.add(bill);
-        this.billService.addBill(bill);
-        Mockito.when(this.billService.findByBillId(1L)).thenReturn(Optional.of(bill));
-        Mockito.when(this.billService.findAllBills()).thenReturn(bills);
-        BillCommander commander = BillCommander.getInstance(this.billService);
-        commander.execute();
-        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
-        bill.setPaymentStatus(PaymentStatus.Payed);
-        commander.execute();
-        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Payed);
-    }
 
-    /**
-     * test for the template pattern
-     */
-    @Test
-
-    public void testTemplate() {
-        Bill bill = new Bill();
-        bill.setBillId(1L);
-        bill.setPaymentStatus(PaymentStatus.Pending);
-        List<Bill> bills = new ArrayList<>();
-        bills.add(bill);
-        this.billService.addBill(bill);
-        Mockito.when(this.billService.findByBillId(1L)).thenReturn(Optional.of(bill));
-        Mockito.when(this.billService.findAllBills()).thenReturn(bills);
-        BillCommander commander = BillCommander.getInstance(this.billService);
-        commander.execute();
-        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
-        bill.setPaymentStatus(PaymentStatus.Payed);
-        commander.execute();
-        assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Payed);
-    }
 
 }

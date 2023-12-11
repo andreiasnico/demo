@@ -15,13 +15,8 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Table(name = "Bill")
-public class Bill {
-    @Id
-    @GeneratedValue
-    private Long billId;
+public class Bill extends BankStatment{
 
-    @Column(name = "deliveryMethod")
-    private DeliveryMethods deliveryMethod;
 
     @Column(name = "paymentStatus")
     private PaymentStatus paymentStatus;
@@ -39,8 +34,8 @@ public class Bill {
     @Override
     public String toString() {
         return "Bill{" +
-                "billId=" + billId +
-                ", deliveryMethod=" + deliveryMethod +
+                "billId=" + bankStatmentId +
+                ", deliveryMethod=" + deliveryMethods +
                 ", paymentStatus=" + paymentStatus +
                 '}';
 

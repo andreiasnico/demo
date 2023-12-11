@@ -26,18 +26,18 @@ public class PaymentService {
     public Payment addPayment(Payment payment){
         this.paymentRepository.save(payment);
 
-        Optional<Bill> testBill = this.billService.findByBillId(payment.getBill().getBillId());
+        Optional<Bill> testBill = this.billService.findByBillId(payment.getBill().getBankStatmentId());
         this.billService.updateBill(testBill.get());
         payment.getBill().notifyPayments(); // notify to get them updated
         return payment;
     }
 
     public void deletePaymentById(Long paymentId){
-        this.paymentRepository.deleteByPaymentId(paymentId);
+        this.paymentRepository.deleteByBankStatmentId(paymentId);
     }
 
     public Payment findPaymentById(Long id){
-        return this.paymentRepository.findByPaymentId(id);
+        return this.paymentRepository.findByBankStatmentId(id);
     }
 
     public void delete(Payment payment){
@@ -45,14 +45,14 @@ public class PaymentService {
     }
 
     public void updatePayment(Payment payment) {
-        Payment updatedPayment = paymentRepository.findByPaymentId(payment.getPaymentId());
+        Payment updatedPayment = paymentRepository.findByBankStatmentId(payment.getBankStatmentId());
         updatedPayment.setAmount(payment.getAmount());
         updatedPayment.setBill(payment.getBill());
         paymentRepository.save(updatedPayment);
     }
 
     public void readPayment(Payment payment) {
-        paymentRepository.findById(payment.getPaymentId());
+        paymentRepository.findById(payment.getBankStatmentId());
     }
 
 

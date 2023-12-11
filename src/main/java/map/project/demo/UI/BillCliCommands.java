@@ -73,7 +73,7 @@ public class BillCliCommands {
             addBill.setUnit(unit.get());
         }
         if (!deliveryMethod.equals("")) {
-            addBill.setDeliveryMethod(delivery);
+            addBill.setDeliveryMethods(delivery);
         }
         if (!status.equals("")) {
             addBill.setPaymentStatus(paymentStatus);
@@ -107,7 +107,7 @@ public class BillCliCommands {
         PaymentStatus payment = PaymentStatus.valueOf(status);
         Bill updateBill = bill.get();
         updateBill.setUnit(unit.get());
-        updateBill.setDeliveryMethod(delivery);
+        updateBill.setDeliveryMethods(delivery);
         updateBill.setPaymentStatus(payment);
         return this.billService.save(updateBill).toString();
     }

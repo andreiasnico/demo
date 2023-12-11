@@ -19,7 +19,7 @@ public class BillService {
 
 
     public Optional<Bill> findByBillId(Long billId) {
-        return Optional.ofNullable(this.billRepository.findByBillId(billId));
+        return Optional.ofNullable(this.billRepository.findByBankStatmentId(billId));
     }
 
     public List<Bill> findAllBills() {
@@ -48,7 +48,7 @@ public class BillService {
     }
 
     public void read(Bill bill) {
-        this.billRepository.findById(bill.getBillId());
+        this.billRepository.findById(bill.getBankStatmentId());
     }
 
     public void delete(Bill bill) {
@@ -56,7 +56,7 @@ public class BillService {
     }
 
     public void updateBill(Bill bill){
-        Bill updatedBill = this.billRepository.findByBillId(bill.getBillId());
+        Bill updatedBill = this.billRepository.findByBankStatmentId(bill.getBankStatmentId());
         updatedBill.setPayments(bill.getPayments());
     }
 }

@@ -12,6 +12,7 @@ import lombok.Setter;
 @Setter
 public class EntryCard {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long empoyeeId;
 
     @Column

@@ -41,8 +41,8 @@ public  class BillCommander implements Commander{
      * we want to set all the bills that have no delivery method to Email
      */
     private void setBillDelivery() {
-        this.billService.findAllBills().stream().filter(bill -> bill.getDeliveryMethod() != DeliveryMethods.Post).
-                forEach(bill -> bill.setDeliveryMethod(DeliveryMethods.Email));
+        this.billService.findAllBills().stream().filter(bill -> bill.getDeliveryMethods() != DeliveryMethods.Post).
+                forEach(bill -> bill.setDeliveryMethods(DeliveryMethods.Email));
     }
     @Override
     public void execute() {

@@ -22,8 +22,8 @@ public class PaymentCommander implements Commander {
     }
 
     private void setDeliveryMethod(){
-        this.paymentService.findAllPayments().stream().filter(payment -> payment.getDeliveryMethod() != DeliveryMethods.Post).
-                forEach(payment -> payment.setDeliveryMethod(DeliveryMethods.Email));
+        this.paymentService.findAllPayments().stream().filter(payment -> payment.getDeliveryMethods() != DeliveryMethods.Post).
+                forEach(payment -> payment.setDeliveryMethods(DeliveryMethods.Email));
     }
     @Override
     public void execute() {
