@@ -10,6 +10,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.util.Optional;
+
 /**
  * class for the employee class command line interface
  */
@@ -66,12 +68,15 @@ public class EmployeeCliCommands {
                                  @ShellOption(value = {"name"}, help = "name of the employee") String name,
                                  @ShellOption(value = {"state"}, help = "state of the employee") String state,
                                  @ShellOption(value = {"salary"}, help = "salary of the employee") Long salary) {
-        Employee updateEmployee = this.employeeService.findEmployeeById(employeeId);
-        updateEmployee.setEmployeeId(employeeId);
-        updateEmployee.setName(name);
-        updateEmployee.setSalary(salary);
-        updateEmployee.setState(State.valueOf(state));
-        this.employeeService.updateEmployee(updateEmployee);
+        Optional<Employee> updateEmployee = this.employeeService.findEmployeeById(employeeId);
+        if(updateEmployee.isEmpty()){
+            return "There is no employee with this id";
+        }
+        updateEmployee.get().setEmployeeId(employeeId);
+        updateEmployee.get().setName(name);
+        updateEmployee.get().setSalary(salary);
+        updateEmployee.get().setState(State.valueOf(state));
+        this.employeeService.updateEmployee(updateEmployee.get());
         return "Employee updated " + updateEmployee.toString();
     }
 

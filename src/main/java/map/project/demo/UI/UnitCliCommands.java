@@ -1,5 +1,7 @@
 package map.project.demo.UI;
 
+import map.project.demo.Model.Building;
+import map.project.demo.Model.Renter;
 import map.project.demo.Service.BuildingService;
 import map.project.demo.Service.RenterService;
 import org.springframework.shell.standard.ShellComponent;
@@ -50,12 +52,20 @@ public class UnitCliCommands {
                           @ShellOption(value = {"buildingId"}, help = "id of the building") Long buildingId,
                           @ShellOption(value = {"renterId"}, help = "id of the renter") Long renterId
     ) {
+        Optional<Building>  building = this.buildingService.findBuildingById(buildingId);
+        if(building.isEmpty()){
+            return "There is no building with this id";
+        }
+        Optional<Renter> renter = this.renterService.findBYRenterId(renterId);
+        if(renter.isEmpty()){
+            return "There is no renter with this id";
+        }
         Unit addUnit = new Unit();
         addUnit.setName(name);
         addUnit.setStoryNumber(storyNumber);
         addUnit.setSurface(surface);
-        addUnit.setBuilding(this.buildingService.findBuildingById(buildingId));
-        addUnit.setRenter(this.renterService.findBYRenterId(renterId));
+        addUnit.setBuilding(building.get());
+        addUnit.setRenter(renter.get());
         return this.unitService.save(addUnit).toString();
     }
 
@@ -75,9 +85,13 @@ public class UnitCliCommands {
         if (unit.equals(Optional.empty())) {
             return "There is no unit with this id";
         }
+        Optional<Renter> renter = this.renterService.findBYRenterId(renterId);
+        if(renter.isEmpty()){
+            return "There is no renter with this id";
+        }
         Unit updateUnit = unit.get();
         updateUnit.setName(name);
-        updateUnit.setRenter(this.renterService.findBYRenterId(renterId));
+        updateUnit.setRenter(renter.get());
         return this.unitService.save(updateUnit).toString();
     }
 

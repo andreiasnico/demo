@@ -14,6 +14,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.time.LocalTime;
+import java.util.Optional;
 
 @ShellComponent
 public class EmployeeScheduleCommands {
@@ -41,31 +42,67 @@ public class EmployeeScheduleCommands {
                               @ShellOption(value = {"unitId"} , help = "unit id") Long unitId ,
                               @ShellOption(value = {"startTime"} , help = "start time") String startTime,
                               @ShellOption(value = {"endTime"} , help="end time")String endTime){
+        Optional<Employee> employeeOptional = this.employeeService.findEmployeeById(employeeId);
+        if(employeeOptional.isEmpty()){
+            return "There is no employee with this id";
+        }
+        Optional<Unit> unit = this.unitService.findByUnitId(unitId);
+        if(unit.isEmpty()){
+            return "There is no unit with this id";
+        }
         EmployeeSchedule employeeSchedule = new EmployeeSchedule();
-        employeeSchedule.setEmployee(this.employeeService.findEmployeeById(employeeId));
-        employeeSchedule.setUnit(this.unitService.findByUnitId(unitId).get()); // todo change this to make it nice
+        employeeSchedule.setEmployee(employeeOptional.get());
+        employeeSchedule.setUnit(unit.get());
         employeeSchedule.setStartTime(LocalTime.parse(startTime));
         employeeSchedule.setEndTime(LocalTime.parse(endTime));
         return this.employeeScheduleService.save(employeeSchedule).toString();
     }
 
+    /**
+     * method where we delete a schedule from the database
+     * @param employeeId employee id
+     * @param unitId unit id
+     * @return prompt
+     */
     @ShellMethod(key = "delete schedule" , value = "delete a schedule")
     public String deleteSchedule(@ShellOption(value = {"employeeId"} , help = "employee id") Long employeeId,
                                  @ShellOption(value = {"unitId"} , help = "unit id") Long unitId){
-        Unit unit = this.unitService.findByUnitId(unitId).get();
-        Employee employee = this.employeeService.findEmployeeById(employeeId);
+        Optional<Unit> unit = this.unitService.findByUnitId(unitId);
+        Optional<Employee> employee = this.employeeService.findEmployeeById(employeeId);
+        if(unit.isEmpty()){
+            return "There is no unit with this id";
+        }
 
-        this.employeeScheduleService.deleteSchedule(employee , unit);
+        if(employee.isEmpty()){
+            return "There is no employee with this id";
+        }
+        this.employeeScheduleService.deleteSchedule(employee.get() , unit.get());
         return "Schedule has been removed";
     }
 
+    /**
+     * method where we update a schedule of an employee
+     * @param employeeId employee id
+     * @param unitId unit id
+     * @param startTime time when the schedule starts
+     * @param endTime tiem when the schedule ends
+     * @return prompt
+     */
     @ShellMethod(key = "update schedule" , value = "update a scehdule plan")
     public String updateSchedule(@ShellOption(value = {"employeeId"} , help = "employee id") Long employeeId,
                                  @ShellOption(value = {"unitId"} , help = "unit id") Long unitId,
                                  @ShellOption(value = {"startTime"} , help = "start time of schedule") String startTime,
                                  @ShellOption(value = {"endTime"} , help ="end time of schedule") String endTime){
-        EmployeeSchedule employeeSchedule = this.employeeScheduleService.findSchedule(this.employeeService.findEmployeeById(employeeId),
-                this.unitService.findByUnitId(unitId).get());
+        Optional<Employee> employee = this.employeeService.findEmployeeById(employeeId);
+        if(employee.isEmpty()){
+            return "There is no employee with this id";
+        }
+        Optional<Unit> unit = this.unitService.findByUnitId(unitId);
+        if(unit.isEmpty()){
+            return "There is no unit with this id";
+        }
+        EmployeeSchedule employeeSchedule = this.employeeScheduleService.findSchedule(employee.get(),
+                unit.get());
         employeeSchedule.setStartTime(LocalTime.parse(startTime));
         employeeSchedule.setEndTime(LocalTime.parse(endTime));
 

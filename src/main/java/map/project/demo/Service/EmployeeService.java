@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -64,13 +65,8 @@ public class EmployeeService {
      * @return employee / null
      * if there is none we throw an exception
      */
-    public Employee findEmployeeById(Long employeeId){
-        try{
-            return this.employeeRepository.findByEmployeeId(employeeId);
-        }catch (Exception e){
-            System.out.println("there is no employee with this employee");
-        }
-        return null;
+    public Optional<Employee> findEmployeeById(Long employeeId){
+      return this.employeeRepository.findByEmployeeId(employeeId);
     }
 
     public Object findAllEmployees() {

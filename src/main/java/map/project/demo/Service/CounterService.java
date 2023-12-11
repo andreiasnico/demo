@@ -4,6 +4,8 @@ import map.project.demo.Model.Counter;
 import map.project.demo.Repository.CounterRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CounterService {
     private CounterRepository counterRepository;
@@ -29,14 +31,8 @@ public class CounterService {
         this.counterRepository.deleteCounterByCounterId(counterId);
     }
 
-    public Counter findbyCounterId(Long counterId){
+    public Optional<Counter> findbyCounterId(Long counterId){
         return this.counterRepository.findByCounterId(counterId);
-    }
-
-    public void updateCounter(Counter counter) {
-        Counter updatedCounter = counterRepository.findByCounterId(counter.getCounterId());
-        updatedCounter.setCounterId(counter.getCounterId());
-        counterRepository.save(updatedCounter);
     }
 
     public void readCounter(Counter counter) {

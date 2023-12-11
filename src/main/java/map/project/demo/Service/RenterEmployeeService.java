@@ -24,18 +24,8 @@ public class RenterEmployeeService {
         return this.renterEmployeeRepository.findAll();
     }
 
-    public RenterEmployee findRenterEmployeeById(Long renterEmployeeId){
-        try{
-            Optional<RenterEmployee> employee = this.renterEmployeeRepository.findRenterEmployeeByRenterEmployeeId(renterEmployeeId);
-            if(employee.isPresent()){
-                return employee.get();
-            }
-            throw new Exception("there is no employee with this id");
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
+    public Optional<RenterEmployee> findRenterEmployeeById(Long renterEmployeeId){
+        return this.renterEmployeeRepository.findRenterEmployeeByRenterEmployeeId(renterEmployeeId);
     }
 
     public RenterEmployee save(RenterEmployee renterEmployee){

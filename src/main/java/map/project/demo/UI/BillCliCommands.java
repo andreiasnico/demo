@@ -121,7 +121,7 @@ public class BillCliCommands {
     @ShellMethod(key = "delete bill", value = "delete a bill from our database")
     public String deleteBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
-        if (bill.equals(Optional.empty())) {
+        if (bill.isEmpty()) {
             return "There is no bill with this id";
         }
         billService.delete(bill.get());
@@ -137,7 +137,7 @@ public class BillCliCommands {
     @ShellMethod(key = "read bill", value = "read a bill from our database")
     public String readBill(@ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
         Optional<Bill> bill = billService.findByBillId(billId);
-        if (bill.equals(Optional.empty())) {
+        if (bill.isEmpty()) {
             return "There is no bill with this id";
         }
         return bill.get().toString();

@@ -4,11 +4,13 @@ import map.project.demo.Model.Reading;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface ReadingRepository extends JpaRepository<Reading,Long> {
 
-        Reading findByReadingId(Long id);
+        Optional<Reading> findByReadingId(Long id);
 
         boolean removeByReadingId(Long id);
 

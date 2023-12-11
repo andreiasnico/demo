@@ -11,6 +11,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.util.Optional;
+
 /**
  * class that creates the command line interface for the payment
  */
@@ -58,8 +60,11 @@ public class PaymentCliCommands {
 
     @ShellMethod(key = "delete payment", value = "delete payment by id")
     public String deletePayment(@ShellOption(value = {"paymentId"}, help = "id of paymnent") Long paymentId) {
-        Payment payment = this.paymentService.findPaymentById(paymentId);
-        this.paymentService.delete(payment);
+        Optional<Payment> payment = this.paymentService.findPaymentById(paymentId);
+        if(payment.isEmpty()){
+            return "There is no payment with this id";
+        }
+        this.paymentService.delete(payment.get());
         return "Payment has been deleted";
     }
 
@@ -75,11 +80,14 @@ public class PaymentCliCommands {
     public String updatePayment(@ShellOption(value = {"paymentId"}, help = "id of the payment") Long paymentId,
                                 @ShellOption(value = {"amount"}, help = "volume of entity") Long amount,
                                 @ShellOption(value = {"billId"}, help = "id of the bill") Long billId) {
-        Payment payment = this.paymentService.findPaymentById(paymentId);
-        payment.setBankStatmentId(paymentId);
-        payment.setAmount(amount);
-        payment.setBill(this.billService.findByBillId(billId).get());
-        this.paymentService.updatePayment(payment);
+        Optional<Payment> payment = this.paymentService.findPaymentById(paymentId);
+        if(payment.isEmpty()){
+            return "There is no payment with this id";
+        }
+        payment.get().setBankStatmentId(paymentId);
+        payment.get().setAmount(amount);
+        payment.get().setBill(this.billService.findByBillId(billId).get());
+        this.paymentService.updatePayment(payment.get());
         return "Payment has been updated" + payment.toString();
     }
 
@@ -91,7 +99,11 @@ public class PaymentCliCommands {
      */
     @ShellMethod(key = "payment info", value = "read payment by id")
     public String readPayment(@ShellOption(value = {"paymentId"}, help = "id of the payment") Long paymentId) {
-        return this.paymentService.findPaymentById(paymentId).toString();
+        Optional<Payment> payment = this.paymentService.findPaymentById(paymentId);
+        if(payment.isEmpty()){
+            return "There is no payment with this id";
+        }
+        return payment.get().toString();
     }
 
 }

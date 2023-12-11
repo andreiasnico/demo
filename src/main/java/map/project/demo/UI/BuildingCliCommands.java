@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * class for the building command line interface
@@ -67,10 +68,13 @@ public class BuildingCliCommands {
                                  @ShellOption(value = {"stories"}, help = "number of stories") int stories,
                                  @ShellOption(value = {"name"}, help = "name of the building") String name
     ) {
-        Building updateBuilding = this.buildingService.findBuildingById(buildingId);
-        updateBuilding.setNumberOfStories(stories);
-        updateBuilding.setName(name);
-        this.buildingService.updateBuilding(updateBuilding);
+        Optional<Building> updateBuilding = this.buildingService.findBuildingById(buildingId);
+        if(updateBuilding.isEmpty()){
+            return "There is no building with this id";
+        }
+        updateBuilding.get().setNumberOfStories(stories);
+        updateBuilding.get().setName(name);
+        this.buildingService.updateBuilding(updateBuilding.get());
         return "Building updated";
     }
 
@@ -82,9 +86,11 @@ public class BuildingCliCommands {
      */
     @ShellMethod(key = "delete building", value = "delete a building from our database")
     public String deleteBuilding(@ShellOption(value = {"buildingId"}, help = "id of the building") Long buildingId) {
-        Building deleteBuilding = new Building();
-        deleteBuilding.setBuildingId(buildingId);
-        this.buildingService.deleteBuilding(deleteBuilding);
+        Optional<Building> foundBuilding = this.buildingService.findBuildingById(buildingId);
+        if(foundBuilding.isEmpty()){
+            return "There is no building with this id";
+        }
+        this.buildingService.deleteBuilding(foundBuilding.get());
         return "Building deleted";
     }
 
@@ -96,9 +102,11 @@ public class BuildingCliCommands {
      */
     @ShellMethod(key = "building info", value = "read a building from our database")
     public String buildingInfo(@ShellOption(value = {"buildingId"}, help = "id of the building") Long buildingId) {
-        Building readBuilding = new Building();
-        readBuilding.setBuildingId(buildingId);
-        this.buildingService.readBuilding(readBuilding);
+        Optional<Building> foundBuilding = this.buildingService.findBuildingById(buildingId);
+        if(foundBuilding.isEmpty()){
+            return "There is no building with this id";
+        }
+        this.buildingService.readBuilding(foundBuilding.get());
         return "Building read";
     }
 

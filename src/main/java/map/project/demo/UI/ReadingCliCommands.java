@@ -1,5 +1,7 @@
 package map.project.demo.UI;
 
+import map.project.demo.Model.Bill;
+import map.project.demo.Model.Counter;
 import map.project.demo.Model.Reading;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.CounterService;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+
+import java.util.Optional;
 
 /**
  * class for the command line interface of the reading class
@@ -44,10 +48,18 @@ public class ReadingCliCommands {
                              @ShellOption(value = {"billId"}, help = "id of the bill") Long billId,
                              @ShellOption(value = {"counterId"}, help = "id of the bill") Long counterId
     ) {
+        Optional<Counter> counter = this.counterService.findbyCounterId(counterId);
+        if (counter.isEmpty()) {
+            return "There is no counter with this id";
+        }
+        Optional<Bill> bill = this.billService.findByBillId(billId);
+        if(bill.isEmpty()){
+            return "There is no bill with this id";
+        }
         Reading reading = new Reading();
         reading.setVolumeReading(volume);
-        reading.setCounter(this.counterService.findbyCounterId(counterId));
-        reading.setBill(this.billService.findByBillId(billId).get());
+        reading.setCounter(counter.get());
+        reading.setBill(bill.get());
         return this.readingService.save(reading).toString();
     }
 
@@ -59,8 +71,11 @@ public class ReadingCliCommands {
      */
     @ShellMethod(key = "delete reading", value = "delete reading by id")
     public String deleteReading(@ShellOption(value = {"readingId"}, help = "id of the reading") Long readingId) {
-        Reading reading = this.readingService.findReadingById(readingId);
-        this.readingService.delete(reading);
+        Optional<Reading> reading = this.readingService.findReadingById(readingId);
+        if(reading.isEmpty()){
+            return "There is no reading with this id";
+        }
+        this.readingService.delete(reading.get());
         return "Reading has been removed";
     }
 
@@ -78,11 +93,18 @@ public class ReadingCliCommands {
                                 @ShellOption(value = {"volume"}, help = "volume of the reading") Long volume,
                                 @ShellOption(value = {"counter"}, help = "counter id") Long counterId,
                                 @ShellOption(value = {"bill"}, help = "billId") Long billId) {
-        Reading reading = this.readingService.findReadingById(readingId);
-        reading.setVolumeReading(volume);
-        reading.setBill(this.billService.findByBillId(billId).get());
-        reading.setCounter(this.counterService.findbyCounterId(counterId));
-        return this.readingService.save(reading).toString();
+        Optional<Reading> reading = this.readingService.findReadingById(readingId);
+        if(reading.isEmpty()){
+            return "There is no reading with this id";
+        }
+        Optional<Counter> counter = this.counterService.findbyCounterId(counterId);
+        if(counter.isEmpty()){
+            return "There is no counter with this id";
+        }
+        reading.get().setVolumeReading(volume);
+        reading.get().setBill(this.billService.findByBillId(billId).get());
+        reading.get().setCounter(counter.get());
+        return this.readingService.save(reading.get()).toString();
     }
 
 }

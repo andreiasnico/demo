@@ -3,6 +3,7 @@ package map.project.demo.Service;
 import map.project.demo.Model.Bill;
 import map.project.demo.Model.Unit;
 import map.project.demo.Repository.BillRepository;
+import map.project.demo.Repository.UnitRepository;
 import map.project.demo.Service.Commanders.BillCommander;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ import java.util.Optional;
 public class BillService {
     @Autowired
     private BillRepository billRepository;
-    //todo implementation of harder stuff than the repo
 
-
+    @Autowired
+    private UnitRepository unitRepository;
     public Optional<Bill> findByBillId(Long billId) {
         return Optional.ofNullable(this.billRepository.findByBankStatmentId(billId));
     }

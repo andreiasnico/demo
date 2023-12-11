@@ -9,6 +9,7 @@ import map.project.demo.Service.CounterService;
 import org.springframework.shell.standard.ShellOption;
 
 import java.sql.Date;
+import java.util.Optional;
 
 /**
  * class that manages the counter command line interface
@@ -56,8 +57,11 @@ public class CounterCliCommands {
      */
     @ShellMethod(key = "delete counter", value = "delete counter by id")
     public String deleteCounter(@ShellOption(value = {"counterId"}, help = "id of the counter") Long counterId) {
-        Counter counter = this.counterService.findbyCounterId(counterId);
-        this.counterService.delete(counter);
+        Optional<Counter> counter = this.counterService.findbyCounterId(counterId);
+        if(counter.isEmpty()){
+            return "there is no counter with this id";
+        }
+        this.counterService.delete(counter.get());
         return "Counter has been deleted";
     }
 
@@ -73,10 +77,13 @@ public class CounterCliCommands {
     public String updateCounter(@ShellOption(value = {"counterId"}, help = "id of the counter") Long counterId,
                                 @ShellOption(value = {"unitPrice"}, help = "id of the bill") Long unitPrice,
                                 @ShellOption(value = {"date"}, help = "the checking date that we need") String date) {
-        Counter counter = this.counterService.findbyCounterId(counterId);
-        counter.setPricePerUnit(unitPrice);
-        counter.setCheckingDate(Date.valueOf(date));
-        this.counterService.updateCounter(counter);
+        Optional<Counter> counter = this.counterService.findbyCounterId(counterId);
+        if(counter.isEmpty()){
+            return "there is no counter with this id";
+        }
+        counter.get().setPricePerUnit(unitPrice);
+        counter.get().setCheckingDate(Date.valueOf(date));
+        this.counterService.save(counter.get());
         return "Counter has been updated";
     }
 
@@ -88,7 +95,11 @@ public class CounterCliCommands {
      */
     @ShellMethod(key = "counter info", value = "read counter by id")
     public String readCounter(@ShellOption(value = {"counterId"}, help = "id of the counter") Long counterId) {
-        return this.counterService.findbyCounterId(counterId).toString();
+        Optional<Counter> counter = this.counterService.findbyCounterId(counterId);
+        if(counter.isEmpty()){
+            return "There is no counter with this id";
+        }
+        return counter.get().toString();
     }
 
 }

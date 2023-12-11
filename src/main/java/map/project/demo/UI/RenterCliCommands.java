@@ -8,6 +8,8 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.util.Optional;
+
 /**
  * class for the command line interface of the renter class
  */
@@ -59,11 +61,15 @@ public class RenterCliCommands {
                                @ShellOption(value = {"name"}, help = "name of the renter") String name,
                                @ShellOption(value = {"email"}, help = "email of the renter") String email,
                                @ShellOption(value = {"iban"}, help = "iban of the renter") String iban) {
-        Renter updateRenter = this.renterService.findBYRenterId(renterId);
-        updateRenter.setRenterId(renterId);
-        updateRenter.setEmail(email);
-        updateRenter.setIBAN(iban);
-        this.renterService.updateRenter(updateRenter);
+
+        Optional<Renter> updateRenter = this.renterService.findBYRenterId(renterId);
+        if(updateRenter.isEmpty()){
+            return "There is no renter with this id";
+        }
+        updateRenter.get().setRenterId(renterId);
+        updateRenter.get().setEmail(email);
+        updateRenter.get().setIBAN(iban);
+        this.renterService.updateRenter(updateRenter.get());
         return "Renter updated";
     }
 
@@ -75,9 +81,12 @@ public class RenterCliCommands {
      */
     @ShellMethod(key = "delete renter", value = "delete a renter from our database")
     public String deleteRenter(@ShellOption(value = {"renterId"}, help = "id of the renter") Long renterId) {
-        Renter deleteRenter = new Renter();
-        deleteRenter.setRenterId(renterId);
-        this.renterService.deleteRenter(deleteRenter);
+        Optional<Renter> renter = this.renterService.findBYRenterId(renterId);
+        if(renter.isEmpty()){
+            return "There is no renter with this id";
+        }
+
+        this.renterService.deleteRenter(renter.get());
         return "Renter deleted";
     }
 

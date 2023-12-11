@@ -40,8 +40,8 @@ public class ReadingService {
         readingRepository.delete(reading);
     }
 
-    public Reading findReadingById(Long readingId){
-        return this.findReadingById(readingId);
+    public Optional<Reading> findReadingById(Long readingId){
+        return this.readingRepository.findByReadingId(readingId);
     }
 
     public Object findAllReadings() {

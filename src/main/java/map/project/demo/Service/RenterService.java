@@ -47,20 +47,8 @@ public class RenterService {
         renterRepository.delete(deleteRenter);
     }
     //todo make every method like this try catch exceptions
-    public Renter findBYRenterId(Long renterId){
-        try {
-            Optional<Renter> renter = this.renterRepository.findByRenterId(renterId);
-            if (renter.isPresent()) {
-                return renter.get();
-            }
-            else{
-                throw new Exception("there is no such employee with this id");
-            }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return null;
+    public Optional<Renter> findBYRenterId(Long renterId){
+        return this.renterRepository.findByRenterId(renterId);
     }
 
     public Object findAllRenters() {

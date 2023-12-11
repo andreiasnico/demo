@@ -36,7 +36,7 @@ public class PaymentService {
         this.paymentRepository.deleteByBankStatmentId(paymentId);
     }
 
-    public Payment findPaymentById(Long id){
+    public Optional<Payment> findPaymentById(Long id){
         return this.paymentRepository.findByBankStatmentId(id);
     }
 
@@ -45,7 +45,7 @@ public class PaymentService {
     }
 
     public void updatePayment(Payment payment) {
-        Payment updatedPayment = paymentRepository.findByBankStatmentId(payment.getBankStatmentId());
+        Payment updatedPayment = paymentRepository.findByBankStatmentId(payment.getBankStatmentId()).get();
         updatedPayment.setAmount(payment.getAmount());
         updatedPayment.setBill(payment.getBill());
         paymentRepository.save(updatedPayment);
