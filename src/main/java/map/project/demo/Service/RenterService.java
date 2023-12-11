@@ -62,4 +62,8 @@ public class RenterService {
         }
         return null;
     }
+
+    public Object findAllRenters() {
+        return findAll();
+    }
 }

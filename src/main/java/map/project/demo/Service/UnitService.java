@@ -45,4 +45,7 @@ public class UnitService {
     }
 
 
+    public Object findAllUnits() {
+        return findAll();
+    }
 }
