@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class EntryCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long empoyeeId;
 
     @Column

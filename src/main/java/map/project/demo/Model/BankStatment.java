@@ -45,4 +45,6 @@ public  class BankStatment {
     public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
+
+
 }

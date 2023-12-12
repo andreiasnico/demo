@@ -44,11 +44,13 @@ public class BuildingCliCommands {
      * @return returns the added buidling
      */
     @ShellMethod(key = "add building", value = "add a building to our database")
-    public String addBuilding(@ShellOption(value = {"address"}, help = "address of the building") String address,
+    public String addBuilding(@ShellOption(value = {"street"}, help = "address of the building") String address,
+                              @ShellOption(value = {"town"} , help = "name of the town") String town,
                               @ShellOption(value = {"stories"}, help = "number of stories") int stories,
                               @ShellOption(value = {"name"}, help = "name of the building") String name) {
         Building addBuilding = new Building();
-        addBuilding.setAddress(address);
+        addBuilding.setStreet(address);
+        addBuilding.setTown(town);
         addBuilding.setName(name);
         addBuilding.setNumberOfStories(stories);
         return this.buildingService.save(addBuilding).toString();

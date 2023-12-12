@@ -51,6 +51,10 @@ public class EmployeeScheduleCommands {
             return "There is no unit with this id";
         }
         EmployeeSchedule employeeSchedule = new EmployeeSchedule();
+        ScheduleKey scheduleKey = new ScheduleKey();
+        scheduleKey.setEmployeeId(employeeId);
+        scheduleKey.setUnitId(unitId);
+        employeeSchedule.setScheduleKey(scheduleKey);
         employeeSchedule.setEmployee(employeeOptional.get());
         employeeSchedule.setUnit(unit.get());
         employeeSchedule.setStartTime(LocalTime.parse(startTime));

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import map.project.demo.Model.Renter;
 import map.project.demo.Repository.RenterRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,7 @@ public class RenterService {
         return renter;
     }
 
-    public Iterable<Renter> findAll() {
+    public List<Renter> findAll() {
         return renterRepository.findAll();
     }
 
@@ -51,7 +52,7 @@ public class RenterService {
         return this.renterRepository.findByRenterId(renterId);
     }
 
-    public Object findAllRenters() {
+    public List<Renter> findAllRenters() {
         return findAll();
     }
 }

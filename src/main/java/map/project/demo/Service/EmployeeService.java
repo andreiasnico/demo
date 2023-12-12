@@ -55,8 +55,8 @@ public class EmployeeService {
         return employeeRepository.findById(employeeId).get();
     }
 
-    public Object save(Employee addEmployee) {
-        return null;
+    public Employee save(Employee addEmployee) {
+        return this.employeeRepository.save(addEmployee);
     }
 
     /**
@@ -69,7 +69,7 @@ public class EmployeeService {
       return this.employeeRepository.findByEmployeeId(employeeId);
     }
 
-    public Object findAllEmployees() {
+    public List<Employee> findAllEmployees() {
         return this.employeeRepository.findAll();
     }
 }

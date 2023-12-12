@@ -110,3 +110,42 @@
 1702034698183:add renter employee 'vasile' '1999-11-11' 1
 1702034708029:renter employees
 1702034748502:Renter
+1702388726560:bills
+1702388732743:units
+1702388756087:Building
+1702388821292:add building 'antonPann','cluj' 3 'Central'
+1702388925197:add budiling 'Anton pann' 'Cluj' 3 'Central'
+1702388946394:add building 'Anton Pann' 'Cluj' 3 'Central'
+1702389120672:add unit 'Saragosa' 2 200 1 1
+1702389164742:Counter
+1702389191130:add Counter '2023-11-11' 'Electrical' 150
+1702389212249:add Counter '2023-11-11' 'Electricity' 150
+1702389229583:employee
+1702389295521:add employee 'Mugurel' 'FullTime' 'Handyman' 3500
+1702389563239:add bill 'Post' 1 'Pending'
+1702389568021:units
+1702389587815:add bill 'Post' 2 'Pending'
+1702389638879:add unit 'Saragosa' 2 200 1 1
+1702389657047:add bill 'Post' 52 'Pending'
+1702389668854:stacktrace
+1702390509590:Building
+1702390530833:add building 'Anton Pann' 'Cluj' 3 'Central'
+1702390535708:Building
+1702390557255:add Counter '2023-11-11' 'Water' 12.5
+1702390562934:add Counter '2023-11-11' 'Water' 12
+1702390571788:Counters
+1702390573796:Counter
+1702390608168:add employee 'Mugurel' 'FullTime' 'Handyman' 2500
+1702390615932:employee
+1702390715607:add renter 'Maybach' 'maybach@gmail.com' '333FFF'
+1702390722132:Renter
+1702390809390:units
+1702390832886:add unit 'Saragosa' 2 200 1 1
+1702390883326:units
+1702390950798:add bill 'Post' 1 'Pending'
+1702390977014:add payment 1000 1 'BRD' 'Post'
+1702391004237:add reading 1000 1 1
+1702391041982:add schedule 1 1 '15:00' '21:00'
+1702391207622:see all schedules
+1702391501023:add schedule 1 1 '15:00' '21:00'
+1702391513996:see all schedules

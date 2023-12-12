@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "Renter")
 public class Renter {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long renterId;
 
     @Column(name = "firmName")

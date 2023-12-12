@@ -4,6 +4,7 @@ import map.project.demo.Model.Counter;
 import map.project.demo.Repository.CounterRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +20,7 @@ public class CounterService {
         return counter;
     }
 
-    public Iterable<Counter> findAll() {
+    public List<Counter> findAll() {
         return counterRepository.findAll();
     }
 
@@ -44,7 +45,7 @@ public class CounterService {
     }
 
 
-    public Object findAllCounters() {
+    public List<Counter> findAllCounters() {
         return findAll();
     }
 }

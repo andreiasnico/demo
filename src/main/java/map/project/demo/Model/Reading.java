@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Reading {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long readingId;
 
     @Column(name = "volumeReading")

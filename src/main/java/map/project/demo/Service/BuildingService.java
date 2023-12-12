@@ -37,7 +37,7 @@ public class BuildingService {
 
     public void updateBuilding(Building building) {
         Building updatedBuilding = buildingRepository.findById(building.getBuildingId()).get();
-        updatedBuilding.setStreet(building.getAddress());
+        updatedBuilding.setStreet(building.getStreet());
         updatedBuilding.setUnits(building.getUnits());
         buildingRepository.save(updatedBuilding);
     }

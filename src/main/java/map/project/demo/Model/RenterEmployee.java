@@ -15,7 +15,7 @@ import java.util.Date;
 public class RenterEmployee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long renterEmployeeId;
 
     @Column(name = "name")

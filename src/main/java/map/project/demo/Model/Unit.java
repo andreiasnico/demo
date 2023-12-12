@@ -15,7 +15,7 @@ import java.util.List;
 public class Unit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long unitId;
 
     @Column(name = "name")
@@ -41,6 +41,12 @@ public class Unit {
     @OneToMany(mappedBy = "unit", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private List<EmployeeSchedule> employeeSchedules;
 
+    /**
+     * god forbid we do the same stuff without proper annotations
+     * XD
+     */
+    @ManyToMany
+    private List<Employee> employees;
     @Override
     public String toString() {
         return "Unit{" +

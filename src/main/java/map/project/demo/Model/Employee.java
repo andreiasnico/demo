@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name = "Employee")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long employeeId;
 
     @Column(name = "name")
@@ -27,19 +27,31 @@ public class Employee {
     @Column(name = "salary")
     private Long salary;
 
-    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     private List<EmployeeSchedule> employeeSchedules;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employeeId" , referencedColumnName = "employeeId")
     private EntryCard card;
     /**
-     * atribute for the state pattern
+     * attribute for the state pattern
      */
     @Column(name = "state")
     private State state;
 
+    @ManyToMany
+    private List<Unit> units;
 
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", name='" + name + '\'' +
+                ", title=" + title +
+                ", salary=" + salary +
+                ", card=" + card +
+                ", state=" + state +
+                '}';
+    }
 }
