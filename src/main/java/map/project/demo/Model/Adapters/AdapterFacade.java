@@ -9,7 +9,12 @@ import java.lang.reflect.Type;
  * we will take into account the type of the typeClass of each member
  */
 public  class AdapterFacade {
-
+    /**
+     * method where depending on the type of object we give off the correct adapter will handle it
+     * @param concreteObject Object we want to transform
+     * @param classType Class type
+     * @return dto version of the object
+     */
     public static Object adaptToDto(Object concreteObject , Type classType){
         if(classType == Bill.class){
             return new BillAdapter().transformToDto((Bill) concreteObject);
