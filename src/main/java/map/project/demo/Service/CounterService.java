@@ -48,4 +48,8 @@ public class CounterService {
     public List<Counter> findAllCounters() {
         return findAll();
     }
+
+    public Counter findCounterById(Long counterId) {
+        return findbyCounterId(counterId).orElse(null);
+    }
 }
