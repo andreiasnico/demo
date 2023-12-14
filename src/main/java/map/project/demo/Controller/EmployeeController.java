@@ -23,7 +23,6 @@ public class EmployeeController {
     @GetMapping("/find-all-employees")
     public List<EmployeeDto> findAllEmployees() {
         List<Employee> employees = service.findAllEmployees();
-
         return employees.stream().map(employee -> (EmployeeDto) AdapterFacade.adaptToDto(employee, Employee.class))
                 .collect(Collectors.toList());
     }

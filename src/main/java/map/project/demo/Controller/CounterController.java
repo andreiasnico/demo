@@ -5,6 +5,7 @@ import map.project.demo.Model.Counter;
 import map.project.demo.Model.dto.CounterDto;
 import map.project.demo.Service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class CounterController {
     @Autowired
     private CounterService service;
 
-    @RequestMapping("/find-all-counters")
+    @GetMapping("/find-all-counters")
     public List<CounterDto> findAllCounters() {
         List<Counter> counters = service.findAllCounters();
         return counters.stream().map(counter -> (CounterDto) AdapterFacade.adaptToDto(counter, Counter.class))

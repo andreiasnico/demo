@@ -1,6 +1,13 @@
 package map.project.demo;
 
 import map.project.demo.Model.*;
+import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.BillAdapter;
+import map.project.demo.Model.Adapters.BuildingAdapter;
+import map.project.demo.Model.Adapters.CounterAdapter;
+import map.project.demo.Model.dto.BillDto;
+import map.project.demo.Model.dto.BuildingDto;
+import map.project.demo.Model.dto.CounterDto;
 import map.project.demo.Repository.BillRepository;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.Commanders.BillCommander;
@@ -11,9 +18,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.*;
 
 public class TestPatterns {
     @Mock
@@ -64,6 +70,7 @@ public class TestPatterns {
 
     /**
      * test for the commander pattern
+     * directly checking singleton
      */
     @Test
     public void testCommander() {
@@ -80,6 +87,84 @@ public class TestPatterns {
 
         commander.execute();
         assert (this.billService.findByBillId(1L).get().getPaymentStatus() == PaymentStatus.Pending);
+    }
+
+    /**
+     * test for the adapter pattern
+     * we will change the type of object we will get
+     */
+    @Test
+    public void testAdapter() {
+        /**
+         * checking for bill
+         */
+        Bill bill = new Bill();
+        bill.setBankStatmentId(1L);
+        bill.setDeliveryMethods(DeliveryMethods.Email);
+        bill.setPaymentStatus(PaymentStatus.Pending);
+
+        BillAdapter billAdapter = new BillAdapter();
+
+        BillDto billDto = billAdapter.transformToDto(bill);
+
+        assert (Objects.equals(billDto.getBillId(), bill.getBankStatmentId()));
+        assert (billDto.getStatus() == bill.getPaymentStatus());
+        assert (billDto.getDeliveryMethod() == bill.getDeliveryMethods());
+
+        /**
+         * checking for Building
+         */
+        Building building = new Building();
+        building.setName("Central");
+        building.setBuildingId(1L);
+        building.setStreet("Crisan");
+        building.setTown("Cluj");
+        building.setNumberOfStories(3);
+
+        BuildingAdapter buildingAdapter = new BuildingAdapter();
+        BuildingDto buildingDto = buildingAdapter.transformToDto(building);
+
+        assert (Objects.equals(buildingDto.getBuildingId(), building.getBuildingId()));
+        assert (Objects.equals(buildingDto.getName(), building.getName()));
+        assert (Objects.equals(buildingDto.getStreet(), building.getStreet()));
+        assert (Objects.equals(buildingDto.getTown(), building.getTown()));
+        assert (buildingDto.getNumberOfStories() == building.getNumberOfStories());
+
+        /**
+         * checking for Counter
+         */
+        Date date = new Date(2023 , 11 ,11);
+        Counter counter = new Counter();
+        counter.setCounterId(1L);
+        counter.setPricePerUnit(20L);
+        counter.setCounterTypes(CounterTypes.Gas);
+        counter.setCheckingDate(date);
+
+        CounterAdapter counterAdapter = new CounterAdapter();
+        CounterDto counterDto = counterAdapter.transformToDto(counter);
+
+        assert (counterDto.getCounterId().equals(counter.getCounterId()));
+        assert (counterDto.getCounterTypes() == counter.getCounterTypes());
+        assert (counterDto.getCheckingDate().equals(counter.getCheckingDate()));
+        assert (counterDto.getPricePerUnit().equals(counter.getPricePerUnit()));
+
+    }
+
+    /**
+     * test method for checking the facade design pattern
+     */
+    @Test
+    public void testFacade(){
+        Bill bill = new Bill();
+        bill.setBankStatmentId(1L);
+        bill.setDeliveryMethods(DeliveryMethods.Email);
+        bill.setPaymentStatus(PaymentStatus.Pending);
+
+        BillDto billDto = (BillDto) AdapterFacade.adaptToDto(bill , Bill.class);
+
+        assert (Objects.equals(billDto.getBillId(), bill.getBankStatmentId()));
+        assert (billDto.getStatus() == bill.getPaymentStatus());
+        assert (billDto.getDeliveryMethod() == bill.getDeliveryMethods());
     }
 
 
