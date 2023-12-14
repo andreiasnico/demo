@@ -53,11 +53,11 @@ public class CounterServiceTest {
         when(counterRepository.findByCounterId(counterId)).thenReturn(Optional.of(mockCounter));
 
         // Act
-        Counter result = counterService.findCounterById(counterId);
+        Optional<Counter> result = counterService.findbyCounterId(counterId);
 
         // Assert
         verify(counterRepository).findByCounterId(counterId);
-        assertEquals(mockCounter, result);
+        assertEquals(mockCounter, result.get());
     }
 
     @Test

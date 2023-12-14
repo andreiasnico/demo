@@ -49,7 +49,4 @@ public class CounterService {
         return findAll();
     }
 
-    public Counter findCounterById(Long counterId) {
-        return findbyCounterId(counterId).orElse(null);
-    }
 }
