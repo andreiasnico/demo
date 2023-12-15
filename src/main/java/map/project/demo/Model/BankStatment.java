@@ -15,7 +15,6 @@ public  class BankStatment {
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long bankStatmentId;
 
-
     @Column(name = "deliveryMethod")
     protected DeliveryMethods deliveryMethods;
 
