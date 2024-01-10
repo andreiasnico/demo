@@ -60,6 +60,11 @@ public class BillController {
         return (BillDto) AdapterFacade.adaptToDto(bill , Bill.class);
     }
 
+    /**
+     * method to delete a bill
+     * @param billId id of the bill we want deleted
+     * @return billDto of the deleted bill
+     */
     @PostMapping("/delete-bill")
     public BillDto deleteBill(@RequestParam Long billId){
         Optional<Bill> bill = this.service.findByBillId(billId);

@@ -6,12 +6,14 @@ import map.project.demo.Model.Adapters.BillAdapter;
 import map.project.demo.Model.Adapters.BuildingAdapter;
 import map.project.demo.Model.Adapters.CounterAdapter;
 import map.project.demo.Model.dto.BillDto;
+import map.project.demo.Model.dto.Builder.*;
 import map.project.demo.Model.dto.BuildingDto;
 import map.project.demo.Model.dto.CounterDto;
 import map.project.demo.Repository.BillRepository;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.Commanders.BillCommander;
 import map.project.demo.Service.PaymentService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -133,7 +135,7 @@ public class TestPatterns {
         /**
          * checking for Counter
          */
-        Date date = new Date(2023 , 11 ,11);
+        Date date = new Date(2023, 11, 11);
         Counter counter = new Counter();
         counter.setCounterId(1L);
         counter.setPricePerUnit(20L);
@@ -154,13 +156,13 @@ public class TestPatterns {
      * test method for checking the facade design pattern
      */
     @Test
-    public void testFacade(){
+    public void testFacade() {
         Bill bill = new Bill();
         bill.setBankStatmentId(1L);
         bill.setDeliveryMethods(DeliveryMethods.Email);
         bill.setPaymentStatus(PaymentStatus.Pending);
 
-        BillDto billDto = (BillDto) AdapterFacade.adaptToDto(bill , Bill.class);
+        BillDto billDto = (BillDto) AdapterFacade.adaptToDto(bill, Bill.class);
 
         assert (Objects.equals(billDto.getBillId(), bill.getBankStatmentId()));
         assert (billDto.getStatus() == bill.getPaymentStatus());
@@ -168,5 +170,80 @@ public class TestPatterns {
     }
 
 
+    @Test
+    public void testBuilder() {
+        Unit unit = new Unit();
+        unit.setUnitId(1L);
+        unit.setName("saragosa");
+
+        Renter renter = new Renter();
+        renter.setRenterId(1L);
+        renter.setFirmName("Soraga");
+        unit.setRenter(renter);
+        Bill bill = new Bill();
+        bill.setBankStatmentId(1L);
+        bill.setDeliveryMethods(DeliveryMethods.Email);
+        bill.setPaymentStatus(PaymentStatus.Pending);
+        bill.setUnit(unit);
+
+
+        Counter waterCounter = new Counter();
+        waterCounter.setCounterId(1L);
+        waterCounter.setPricePerUnit(10L);
+        waterCounter.setCounterTypes(CounterTypes.Water);
+
+        Counter gasCounter = new Counter();
+        gasCounter.setCounterId(2L);
+        gasCounter.setCounterTypes(CounterTypes.Gas);
+        gasCounter.setPricePerUnit(8L);
+
+        Reading reading = new Reading();
+        reading.setReadingId(1L);
+        reading.setCounter(waterCounter);
+        reading.setBill(bill);
+        reading.setVolumeReading(11L);
+
+        Reading reading1 = new Reading();
+        reading1.setVolumeReading(12L);
+        reading1.setBill(bill);
+        reading1.setCounter(gasCounter);
+        reading1.setReadingId(2L);
+
+        List<Reading> readings = new ArrayList<>();
+        readings.add(reading);
+        readings.add(reading1);
+
+        bill.setReadings(readings);
+
+
+        BillInformationBuilder billInformationBuilder = new BillInformationBuilder();
+        BillInformationDto billInformationDto = billInformationBuilder.buildObject(bill);
+
+        Assertions.assertEquals(billInformationDto.getBillId(), bill.getBankStatmentId());
+        Assertions.assertEquals(billInformationDto.getDeliveryMethods(), bill.getDeliveryMethods());
+        Assertions.assertEquals(billInformationDto.getPaymentStatus(), bill.getPaymentStatus());
+
+        System.out.println(billInformationDto.getAmount());
+
+        BillUnitInformationBuilder billUnitInformationBuilder = new BillUnitInformationBuilder();
+        BillUnitInformationDto billUnitInformationDto = billUnitInformationBuilder.buildObject(bill);
+
+        Assertions.assertEquals(billUnitInformationDto.getBillId(), bill.getBankStatmentId());
+        Assertions.assertEquals(billUnitInformationDto.getDeliveryMethod(), bill.getDeliveryMethods());
+        Assertions.assertEquals(billUnitInformationDto.getPaymentStatus(), bill.getPaymentStatus());
+        Assertions.assertEquals(billUnitInformationDto.getUnitId(), bill.getUnit().getUnitId());
+        Assertions.assertEquals(billUnitInformationDto.getUnitName(), bill.getUnit().getName());
+
+        BillRenterInformationBuilder billRenterInformationBuilder = new BillRenterInformationBuilder();
+        BillRenterInformationDto billRenterInformationDto = billRenterInformationBuilder.buildObject(bill);
+
+        Assertions.assertEquals(billRenterInformationDto.getBillId(), bill.getBankStatmentId());
+        Assertions.assertEquals(billRenterInformationDto.getDeliveryMethod(), bill.getDeliveryMethods());
+        Assertions.assertEquals(billRenterInformationDto.getPaymentStatus(), bill.getPaymentStatus());
+        Assertions.assertEquals(billRenterInformationDto.getUnitId(), bill.getUnit().getUnitId());
+        Assertions.assertEquals(billRenterInformationDto.getUnitName(), bill.getUnit().getName());
+        Assertions.assertEquals(billRenterInformationDto.getRenterId(), bill.getUnit().getRenter().getRenterId());
+        Assertions.assertEquals(billRenterInformationDto.getRenterName(), bill.getUnit().getRenter().getFirmName());
+    }
 
 }
