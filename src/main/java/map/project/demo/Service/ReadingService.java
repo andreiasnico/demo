@@ -47,4 +47,8 @@ public class ReadingService {
     public Object findAllReadings() {
         return findAll();
     }
+
+    public List<Reading> findAllByBill(Bill bill){
+        return this.readingRepository.findAllByBill(bill);
+    }
 }

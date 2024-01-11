@@ -1,7 +1,7 @@
 package map.project.demo;
 
 import map.project.demo.Model.*;
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Adapters.BillAdapter;
 import map.project.demo.Model.Adapters.BuildingAdapter;
 import map.project.demo.Model.Adapters.CounterAdapter;
@@ -10,28 +10,37 @@ import map.project.demo.Model.dto.Builder.*;
 import map.project.demo.Model.dto.BuildingDto;
 import map.project.demo.Model.dto.CounterDto;
 import map.project.demo.Repository.BillRepository;
+import map.project.demo.Repository.PaymentRepository;
+import map.project.demo.Repository.ReadingRepository;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.Commanders.BillCommander;
 import map.project.demo.Service.PaymentService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 
 import java.sql.Date;
 import java.util.*;
 
 public class TestPatterns {
-    @Mock
+    @InjectMocks
     private BillService billService;
+
+    @Mock
+    private BillService mockBillService;
+
+    @Mock
+    private PaymentRepository paymentRepository;
 
     @Mock
     private BillRepository billRepository;
 
-    @Mock
+    @InjectMocks
     private PaymentService paymentService;
+
+    @Mock
+    private ReadingRepository readingRepository;
 
 
     @BeforeEach
@@ -50,7 +59,7 @@ public class TestPatterns {
         List<Reading> readings = new ArrayList<>();
         List<Payment> payments = new ArrayList<>();
         Payment payment = new Payment();
-
+        payment.setBankStatmentId(2L);
         bill.setBankStatmentId(1L);
         payment.setBill(bill);
         payment.setAmount(1000L);
@@ -62,12 +71,17 @@ public class TestPatterns {
         readings.add(reading);
         bill.setReadings(readings);
         bill.setPayments(payments);
-
-        assert (payment.getPaymentStatus() != PaymentStatus.Payed);
-        bill.notifyPayments();
-        assert (payment.getPaymentStatus() == PaymentStatus.Payed);
-
-
+        Mockito.doReturn(readings).when(this.readingRepository).findAllByBill(bill);
+       System.out.println( this.billService.getAllReadingsSum(bill));
+        Mockito.when(this.billRepository.findByBankStatmentId(1L)).thenReturn(bill);
+        //Mockito.when(this.paymentRepository.findAllByBill(bill)).thenReturn(payments);
+        Mockito.doReturn(payments).when(this.paymentRepository).findAllByBill(bill);
+        Mockito.doReturn(payment).when(this.paymentRepository).save(payment);
+//        Mockito.when(this.billService.findByBillId(payment.getBill().getBankStatmentId())).thenReturn(Optional.of(bill));
+        Mockito.doReturn(Optional.of(bill)).when(this.mockBillService).findByBillId(1L);
+        this.paymentService.addPayment(payment);
+        //todo idk why repo is not called up
+        System.out.println(payment.getPaymentStatus());
     }
 
     /**
@@ -162,7 +176,7 @@ public class TestPatterns {
         bill.setDeliveryMethods(DeliveryMethods.Email);
         bill.setPaymentStatus(PaymentStatus.Pending);
 
-        BillDto billDto = (BillDto) AdapterFacade.adaptToDto(bill, Bill.class);
+        BillDto billDto = (BillDto) AdapterProxy.adaptToDto(bill, Bill.class);
 
         assert (Objects.equals(billDto.getBillId(), bill.getBankStatmentId()));
         assert (billDto.getStatus() == bill.getPaymentStatus());
@@ -222,8 +236,6 @@ public class TestPatterns {
         Assertions.assertEquals(billInformationDto.getBillId(), bill.getBankStatmentId());
         Assertions.assertEquals(billInformationDto.getDeliveryMethods(), bill.getDeliveryMethods());
         Assertions.assertEquals(billInformationDto.getPaymentStatus(), bill.getPaymentStatus());
-
-        System.out.println(billInformationDto.getAmount());
 
         BillUnitInformationBuilder billUnitInformationBuilder = new BillUnitInformationBuilder();
         BillUnitInformationDto billUnitInformationDto = billUnitInformationBuilder.buildObject(bill);

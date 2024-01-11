@@ -12,7 +12,6 @@ public class BillRenterInformationBuilder implements Builder<Bill , BillRenterIn
         return new BillRenterInformationDto(billUnitInformationDto.getBillId(),
                 billUnitInformationDto.getPaymentStatus(),
                 billUnitInformationDto.getDeliveryMethod(),
-                billUnitInformationDto.getTotalAmount(),
                 billUnitInformationDto.getUnitId(),
                 billUnitInformationDto.getUnitName(),
                 object.getUnit().getRenter().getRenterId(),

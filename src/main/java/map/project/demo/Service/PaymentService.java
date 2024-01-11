@@ -24,11 +24,10 @@ public class PaymentService {
     }
 
     public Payment addPayment(Payment payment){
-        this.paymentRepository.save(payment);
-
         Optional<Bill> testBill = this.billService.findByBillId(payment.getBill().getBankStatmentId());
-        this.billService.updateBill(testBill.get());
-        payment.getBill().notifyPayments(); // notify to get them updated
+        this.billService.addPaymentToBill(testBill.get() , payment);
+        this.billService.notifyPayments(testBill.get());
+        this.paymentRepository.save(payment);// notify to get them updated
         return payment;
     }
 

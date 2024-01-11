@@ -1,7 +1,7 @@
 package map.project.demo.Controller;
 
 
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Employee;
 import map.project.demo.Model.States.State;
 import map.project.demo.Model.Titles;
@@ -24,7 +24,7 @@ public class EmployeeController {
     @GetMapping("/find-all-employees")
     public List<EmployeeDto> findAllEmployees() {
         List<Employee> employees = service.findAllEmployees();
-        return employees.stream().map(employee -> (EmployeeDto) AdapterFacade.adaptToDto(employee, Employee.class))
+        return employees.stream().map(employee -> (EmployeeDto) AdapterProxy.adaptToDto(employee, Employee.class))
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +40,7 @@ public class EmployeeController {
         employee.setState(State.valueOf(state));
         employee.setSalary(salary);
         this.service.addEmployee(employee);
-        return (EmployeeDto) AdapterFacade.adaptToDto(employee, Employee.class);
+        return (EmployeeDto) AdapterProxy.adaptToDto(employee, Employee.class);
     }
 
     @PostMapping("/delete-employee")
@@ -53,7 +53,7 @@ public class EmployeeController {
 
         this.service.deleteEmployee(employee.get());
 
-        return (EmployeeDto) AdapterFacade.adaptToDto(employee.get(), Employee.class);
+        return (EmployeeDto) AdapterProxy.adaptToDto(employee.get(), Employee.class);
     }
 
     @PostMapping("update-employee")
@@ -72,6 +72,6 @@ public class EmployeeController {
         employee.get().setTitle(Titles.valueOf(title));
         employee.get().setName(name);
         this.service.addEmployee(employee.get());
-        return (EmployeeDto) AdapterFacade.adaptToDto(employee.get() , Employee.class);
+        return (EmployeeDto) AdapterProxy.adaptToDto(employee.get() , Employee.class);
     }
 }

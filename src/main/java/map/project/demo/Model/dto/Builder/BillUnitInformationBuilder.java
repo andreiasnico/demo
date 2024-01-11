@@ -11,7 +11,6 @@ public class BillUnitInformationBuilder implements Builder<Bill,BillUnitInformat
         return new BillUnitInformationDto(billInformationDto.getBillId(),
                 billInformationDto.getPaymentStatus(),
                 billInformationDto.getDeliveryMethods(),
-                billInformationDto.getAmount(),
                 object.getUnit().getUnitId(),
                 object.getUnit().getName());
     }

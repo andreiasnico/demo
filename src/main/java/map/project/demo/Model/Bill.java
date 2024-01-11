@@ -18,9 +18,6 @@ import java.util.stream.Collectors;
 public class Bill extends BankStatment{
 
 
-    @Column(name = "paymentStatus")
-    private PaymentStatus paymentStatus;
-
     @OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
     List<Reading> readings;
 
@@ -42,31 +39,4 @@ public class Bill extends BankStatment{
 
     }
 
-    /**
-     * stream to get the amount necessary to pay the bill
-     *
-     * @return Long sum
-     */
-    public Long getAllReadingsSum() {
-        return this.readings.stream()
-                .map(elem -> Pair.of(elem.getCounter().getPricePerUnit(), elem.getVolumeReading()))
-                .toList().stream().map(value -> value.getFirst() * value.getSecond())
-                .reduce(0L, Long::sum);
-    }
-
-    /**
-     * observer pattern implementation
-     * this is the subject (Bill) that notifies the Observers ( Payment) when the amount stacked into payments
-     * is enough to pay the bill , the payments will receive the notification to change the bill status
-     */
-    //TODO add this method to whenever a payment is created
-    public void notifyPayments() {
-        Long sum = 0L;
-        for (Payment payment : this.payments) {
-            sum += payment.getAmount();
-        }
-        if(sum >= getAllReadingsSum()){
-            this.payments.forEach(Payment::updateStatus);
-        }
-    }
 }

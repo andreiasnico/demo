@@ -7,7 +7,6 @@ public class BillInformationBuilder implements Builder<Bill , BillInformationDto
     public BillInformationDto buildObject(Bill object) {
         return new BillInformationDto(object.getBankStatmentId(),
                 object.getPaymentStatus(),
-                object.getDeliveryMethods(),
-                object.getAllReadingsSum());
+                object.getDeliveryMethods());
     }
 }

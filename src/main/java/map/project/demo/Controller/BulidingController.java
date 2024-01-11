@@ -1,7 +1,7 @@
 package map.project.demo.Controller;
 
 
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Building;
 import map.project.demo.Model.dto.BuildingDto;
 import map.project.demo.Service.BuildingService;
@@ -22,7 +22,7 @@ public class BulidingController {
     public List<BuildingDto> findAllBuildings() {
         List<Building> buildings = buildingService.findAll();
 
-        return buildings.stream().map(building -> (BuildingDto) AdapterFacade.adaptToDto(building, Building.class))
+        return buildings.stream().map(building -> (BuildingDto) AdapterProxy.adaptToDto(building, Building.class))
                 .collect(Collectors.toList());
     }
 
@@ -37,7 +37,7 @@ public class BulidingController {
         building.setNumberOfStories(stories);
         building.setName(name);
         this.buildingService.save(building);
-        return (BuildingDto) AdapterFacade.adaptToDto(building,Building.class);
+        return (BuildingDto) AdapterProxy.adaptToDto(building,Building.class);
     }
 
     @PostMapping("/update-building")
@@ -51,7 +51,7 @@ public class BulidingController {
         building.get().setName(name);
         building.get().setNumberOfStories(stories);
         this.buildingService.save(building.get());
-        return (BuildingDto) AdapterFacade.adaptToDto(building.get(),Building.class);
+        return (BuildingDto) AdapterProxy.adaptToDto(building.get(),Building.class);
     }
 
     @PostMapping("/delete-building")
@@ -61,7 +61,7 @@ public class BulidingController {
             return null;
         }
         this.buildingService.deleteBuilding(building.get());
-        return (BuildingDto) AdapterFacade.adaptToDto(building.get(),Building.class);
+        return (BuildingDto) AdapterProxy.adaptToDto(building.get(),Building.class);
     }
 
 }

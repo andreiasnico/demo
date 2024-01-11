@@ -1,6 +1,6 @@
 package map.project.demo.Controller;
 
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Counter;
 import map.project.demo.Model.CounterTypes;
 import map.project.demo.Model.dto.CounterDto;
@@ -22,7 +22,7 @@ public class CounterController {
     @GetMapping("/find-all-counters")
     public List<CounterDto> findAllCounters() {
         List<Counter> counters = service.findAllCounters();
-        return counters.stream().map(counter -> (CounterDto) AdapterFacade.adaptToDto(counter, Counter.class))
+        return counters.stream().map(counter -> (CounterDto) AdapterProxy.adaptToDto(counter, Counter.class))
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +36,7 @@ public class CounterController {
         counter.setCheckingDate(Date.valueOf(checkDate));
 
         this.service.addCounter(counter);
-        return (CounterDto) AdapterFacade.adaptToDto(counter , Counter.class);
+        return (CounterDto) AdapterProxy.adaptToDto(counter , Counter.class);
     }
 
     @PostMapping("/delete-counter")
@@ -47,7 +47,7 @@ public class CounterController {
         }
         else{
             this.service.delete(counter.get());
-            return (CounterDto) AdapterFacade.adaptToDto(counter.get() , Counter.class);
+            return (CounterDto) AdapterProxy.adaptToDto(counter.get() , Counter.class);
         }
     }
 
@@ -63,7 +63,7 @@ public class CounterController {
             counter.get().setCheckingDate(Date.valueOf(checkingDate));
             counter.get().setPricePerUnit(unitPrice);
             this.service.addCounter(counter.get());
-            return (CounterDto) AdapterFacade.adaptToDto(counter.get() , Counter.class);
+            return (CounterDto) AdapterProxy.adaptToDto(counter.get() , Counter.class);
         }
     }
 }

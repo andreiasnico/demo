@@ -1,6 +1,6 @@
 package map.project.demo.Controller;
 
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Bill;
 import map.project.demo.Model.DeliveryMethods;
 import map.project.demo.Model.Payment;
@@ -26,7 +26,7 @@ public class PaymentController {
     @GetMapping("/find-all-payments")
     public List<PaymentDto> findAllPayments() {
         List<Payment> payments = this.service.findAllPayments();
-        return payments.stream().map(payment -> (PaymentDto) AdapterFacade.adaptToDto(payment, Payment.class))
+        return payments.stream().map(payment -> (PaymentDto) AdapterProxy.adaptToDto(payment, Payment.class))
                 .collect(Collectors.toList());
     }
 
@@ -45,7 +45,7 @@ public class PaymentController {
         payment.setBank(bank);
         payment.setBill(bill.get());
         payment.setDeliveryMethods(DeliveryMethods.valueOf(deliveryMethod));
-        return (PaymentDto) AdapterFacade.adaptToDto(payment , Payment.class);
+        return (PaymentDto) AdapterProxy.adaptToDto(payment , Payment.class);
     }
 
     @PostMapping("/delete-payment")
@@ -57,7 +57,7 @@ public class PaymentController {
 
         this.service.deletePaymentById(paymentId);
 
-        return (PaymentDto) AdapterFacade.adaptToDto(payment , Payment.class);
+        return (PaymentDto) AdapterProxy.adaptToDto(payment , Payment.class);
     }
 
 
@@ -83,6 +83,6 @@ public class PaymentController {
         payment.get().setBank(bank);
 
         this.service.updatePayment(payment.get());
-        return (PaymentDto) AdapterFacade.adaptToDto(payment , Payment.class);
+        return (PaymentDto) AdapterProxy.adaptToDto(payment , Payment.class);
     }
 }

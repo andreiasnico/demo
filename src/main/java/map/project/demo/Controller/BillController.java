@@ -1,15 +1,11 @@
 package map.project.demo.Controller;
 
-import map.project.demo.Model.Adapters.AdapterFacade;
-import map.project.demo.Model.Bill;
-import map.project.demo.Model.DeliveryMethods;
-import map.project.demo.Model.PaymentStatus;
-import map.project.demo.Model.Unit;
+import map.project.demo.Model.*;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.dto.BillDto;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +29,7 @@ public class BillController {
     @GetMapping("/find-all-bills")
     public List<BillDto> findAllBills() {
         List<Bill> bills = service.findAllBills();
-        return bills.stream().map(bill -> (BillDto) AdapterFacade.adaptToDto(bill, Bill.class))
+        return bills.stream().map(bill -> (BillDto) AdapterProxy.adaptToDto(bill, Bill.class))
                 .collect(Collectors.toList());
     }
 
@@ -57,7 +53,7 @@ public class BillController {
         }
         bill.setUnit(unit.get());
         this.service.save(bill);
-        return (BillDto) AdapterFacade.adaptToDto(bill , Bill.class);
+        return (BillDto) AdapterProxy.adaptToDto(bill , Bill.class);
     }
 
     /**
@@ -72,7 +68,7 @@ public class BillController {
             return null;
         }
         this.service.delete(bill.get());
-        return (BillDto) AdapterFacade.adaptToDto(bill.get() , Bill.class);
+        return (BillDto) AdapterProxy.adaptToDto(bill.get() , Bill.class);
     }
 
     @PostMapping("/update-bill")
@@ -86,6 +82,6 @@ public class BillController {
         bill.get().setDeliveryMethods(DeliveryMethods.valueOf(delivery));
         bill.get().setPaymentStatus(PaymentStatus.valueOf(status));
         this.service.save(bill.get());
-        return (BillDto) AdapterFacade.adaptToDto(bill.get(),Bill.class);
+        return (BillDto) AdapterProxy.adaptToDto(bill.get(),Bill.class);
     }
 }

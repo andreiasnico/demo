@@ -9,10 +9,9 @@ public class BillAdapter implements Adapter<Bill , BillDto> {
 
     @Override
     public BillDto transformToDto(Bill concreteObject) {
-        BillDto billDto = new BillDto(concreteObject.getBankStatmentId(),
+        return new BillDto(concreteObject.getBankStatmentId(),
                 concreteObject.getPaymentStatus(),
                 concreteObject.getDeliveryMethods());
-        return billDto;
     }
 
 }

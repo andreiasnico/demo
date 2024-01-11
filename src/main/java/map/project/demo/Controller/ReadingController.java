@@ -1,10 +1,8 @@
 package map.project.demo.Controller;
 
-import map.project.demo.Model.Adapters.AdapterFacade;
 import map.project.demo.Model.Bill;
 import map.project.demo.Model.Counter;
 import map.project.demo.Model.Reading;
-import map.project.demo.Model.Renter;
 import map.project.demo.Service.BillService;
 import map.project.demo.Service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;

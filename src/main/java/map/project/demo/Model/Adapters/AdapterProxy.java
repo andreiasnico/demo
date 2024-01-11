@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
  * facade class in order to make changing every object
  * we will take into account the type of the typeClass of each member
  */
-public  class AdapterFacade {
+public  class AdapterProxy {
     /**
      * method where depending on the type of object we give off the correct adapter will handle it
      * @param concreteObject Object we want to transform

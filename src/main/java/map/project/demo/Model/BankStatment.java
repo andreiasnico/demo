@@ -47,3 +47,4 @@ public  class BankStatment {
 
 
 }
+// spring swagger smth  generate documatation for api

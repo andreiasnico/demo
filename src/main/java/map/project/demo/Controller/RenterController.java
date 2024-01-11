@@ -1,6 +1,6 @@
 package map.project.demo.Controller;
 
-import map.project.demo.Model.Adapters.AdapterFacade;
+import map.project.demo.Model.Adapters.AdapterProxy;
 import map.project.demo.Model.Renter;
 import map.project.demo.Model.dto.RenterDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class RenterController {
     @GetMapping("/find-all-renters")
     public List<RenterDto> findAllRenters() {
         List<Renter> renters = this.service.findAllRenters();
-        return renters.stream().map(renter -> (RenterDto) AdapterFacade.adaptToDto(renter, Renter.class))
+        return renters.stream().map(renter -> (RenterDto) AdapterProxy.adaptToDto(renter, Renter.class))
                 .collect(Collectors.toList());
     }
 
@@ -34,10 +34,10 @@ public class RenterController {
         renter.setIBAN(iban);
 
         this.service.addRenter(renter);
-        return (RenterDto) AdapterFacade.adaptToDto(renter , Renter.class);
+        return (RenterDto) AdapterProxy.adaptToDto(renter , Renter.class);
     }
 
-    @PostMapping("/delete-renter")
+    @PostMapping("/update-renter")
     public RenterDto updateRenter(@RequestParam Long renterId,
                                   @RequestParam String name,
                                   @RequestParam String email,
@@ -52,6 +52,15 @@ public class RenterController {
         renter.get().setFirmName(name);
 
         this.service.addRenter(renter.get());
-        return (RenterDto) AdapterFacade.adaptToDto(renter , Renter.class);
+        return (RenterDto) AdapterProxy.adaptToDto(renter , Renter.class);
+    }
+    @PostMapping("/delete-renter")
+    public RenterDto deleteRenter(@RequestParam Long renterId){
+        Optional<Renter> renter = this.service.findBYRenterId(renterId);
+        if (renter.isEmpty()){
+            return null;
+        }
+        this.service.deleteRenter(renter.get());
+        return (RenterDto) AdapterProxy.adaptToDto(renter.get(),Renter.class);
     }
 }

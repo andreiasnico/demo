@@ -72,13 +72,14 @@ public class BillCliCommands {
         if (unitId != null) {
             addBill.setUnit(unit.get());
         }
-        if (!deliveryMethod.equals("")) {
+        if (!deliveryMethod.isEmpty()) {
             addBill.setDeliveryMethods(delivery);
         }
-        if (!status.equals("")) {
+        if (!status.isEmpty()) {
             addBill.setPaymentStatus(paymentStatus);
         }
-        return this.billService.save(addBill).toString();
+        this.billService.addBill(addBill);
+        return addBill.toString();
     }
 
     /**

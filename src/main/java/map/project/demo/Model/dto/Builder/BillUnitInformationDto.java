@@ -11,17 +11,14 @@ public class BillUnitInformationDto {
 
     private DeliveryMethods deliveryMethod;
 
-    private Long totalAmount;
-
     private Long unitId;
 
     private String unitName;
 
-    public BillUnitInformationDto(Long billId, PaymentStatus paymentStatus, DeliveryMethods deliveryMethod, Long totalAmount, Long unitId, String unitName) {
+    public BillUnitInformationDto(Long billId, PaymentStatus paymentStatus, DeliveryMethods deliveryMethod, Long unitId, String unitName) {
         this.billId = billId;
         this.paymentStatus = paymentStatus;
         this.deliveryMethod = deliveryMethod;
-        this.totalAmount = totalAmount;
         this.unitId = unitId;
         this.unitName = unitName;
     }
@@ -48,14 +45,6 @@ public class BillUnitInformationDto {
 
     public void setDeliveryMethod(DeliveryMethods deliveryMethod) {
         this.deliveryMethod = deliveryMethod;
-    }
-
-    public Long getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Long totalAmount) {
-        this.totalAmount = totalAmount;
     }
 
     public Long getUnitId() {

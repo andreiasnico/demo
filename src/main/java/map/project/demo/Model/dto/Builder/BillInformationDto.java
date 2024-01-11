@@ -11,13 +11,11 @@ public class BillInformationDto {
 
     private DeliveryMethods deliveryMethods;
 
-    private Long amount;
 
-    public BillInformationDto(Long billId, PaymentStatus paymentStatus, DeliveryMethods deliveryMethods, Long amount) {
+    public BillInformationDto(Long billId, PaymentStatus paymentStatus, DeliveryMethods deliveryMethods) {
         this.billId = billId;
         this.paymentStatus = paymentStatus;
         this.deliveryMethods = deliveryMethods;
-        this.amount = amount;
     }
 
     public Long getBillId() {
@@ -44,21 +42,12 @@ public class BillInformationDto {
         this.deliveryMethods = deliveryMethods;
     }
 
-    public Long getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString() {
         return "BillInformationDto{" +
                 "billId=" + billId +
                 ", paymentStatus=" + paymentStatus +
                 ", deliveryMethods=" + deliveryMethods +
-                ", amount=" + amount +
                 '}';
     }
 }
